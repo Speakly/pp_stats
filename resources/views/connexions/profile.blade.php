@@ -41,17 +41,17 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-md-offset-4 text-center">
+                                    <div class="col-md-6 col-md-offset-4 text-center inscription-birthday">
                                         <label>Votre date de naissance*</label>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 inscription-select">
                                                     {!! Form::selectRange('number', 1, 31, 1, ['class' => 'form-control form-control-default']) !!}
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 inscription-select">
                                                     {!! Form::selectMonth('month', 1, ['class' => 'form-control form-control-default']) !!}
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 inscription-select">
                                                     {!! Form::selectYear('year', 1945, 2015, 2000, ['class' => 'form-control form-control-default']) !!}
                                                 </div>
                                             </div>
@@ -95,7 +95,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="form-group inscription-select">
                                             {!! Form::select('poste', ['' => 'Séléctionner votre poste*', 'Meneur' => 'Meneur', 'Arrière' => 'Arrière', 'Ailier' => 'Ailier', 'Ailier Fort' => 'Ailier Fort', 'Pivot' => 'Pivot'], null, ['class' => 'form-control-default form-control']) !!}
                                             {!! $errors->first('poste', '<small class="help-block">:message</small>') !!}
                                         </div>

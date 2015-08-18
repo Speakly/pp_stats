@@ -27,7 +27,7 @@ class SearchController extends Controller
     public function autocomplete(){
         $term = Input::get('term');
         $results = array();
-        $queries = DB::table('club')
+        $queries = DB::table('clubs')
             ->where('nom', 'LIKE',  $term.'%')
             ->take(20)->get();
         foreach ($queries as $query)
