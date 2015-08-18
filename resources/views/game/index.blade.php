@@ -2,6 +2,7 @@
 
 @section('css')
     <link href="{{ URL::asset('assets/css/app.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/skin-orange.css') }}" type="text/css">
 @stop
 
@@ -60,11 +61,40 @@
                         <div class="panel-body">
                             {!! Form::open([
                                 'method' => 'POST',
-                                'action' => 'ConnexionController@updateProfile',
+                                'action' => 'GameController@create',
                                 'enctype' => 'multipart/form-data'
                                 ])
                             !!}
-                                
+                            
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {!! Form::text('club', $user->club->nom, array('placeholder' => 'Votre club*', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
+                                            {!! Form::hidden('club_id_user', $user->club->id) !!}
+                                            {!! $errors->first('club', '<small class="help-block">:message</small>') !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group inscription-select">
+                                            {!! Form::text('club', null, array('placeholder' => 'Le club adverse*', 'id' => 'q', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
+                                            {!! Form::hidden('club_id', null, array('id' => 'i')) !!}
+                                            {!! $errors->first('club', '<small class="help-block">:message</small>') !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"> 
+                                		<p>Date: <input type="text" id="datepicker" name="date"></p>
+                                	</div>
+                                	<div class='col-md-6'>
+                                		<p> Match à domicile ?</p>
+                                		Oui {!! Form::radio('domicile', 1, 'oui') !!}
+										Non {!! Form::radio('domicile', 0, 'non') !!}
+                                	</div>
+                                </div>
+                                <div class="text-center inscription-btn btn-submit-form">
+                                    {!! Form::submit('Renseigner mon match', ['class' => 'btn btn-skin']) !!}
+                                </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -82,7 +112,7 @@
         $(function()
         {
             $( "#q" ).autocomplete({
-                source: "search/club",
+                source: BASE_URL + "search/club",
                 minLength: 3,
                 select: function(event, ui) {
                     $('#q').val(ui.item.value);
@@ -90,5 +120,8 @@
                 }
             });
         });
+          $(function() {
+		    $( "#datepicker" ).datepicker();
+		  });
     </script>
 @stop

@@ -37,8 +37,6 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="id" value="{{ $user->id }}">
                                             
-                                            <!--<img src="{{ URL::asset('assets/images/plus.png') }}" >-->
-                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-md-offset-4 text-center inscription-birthday">
@@ -46,13 +44,13 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 inscription-select">
-                                                    {!! Form::selectRange('number', 1, 31, 1, ['class' => 'form-control form-control-default']) !!}
+                                                    {!! Form::selectRange('number', 1, 31, 1, ['class' => 'form-control inscription-placeholder form-control-default']) !!}
                                                 </div>
                                                 <div class="col-md-4 inscription-select">
-                                                    {!! Form::selectMonth('month', 1, ['class' => 'form-control form-control-default']) !!}
+                                                    {!! Form::selectMonth('month', 1, ['class' => 'form-control inscription-placeholder form-control-default']) !!}
                                                 </div>
                                                 <div class="col-md-4 inscription-select">
-                                                    {!! Form::selectYear('year', 1945, 2015, 2000, ['class' => 'form-control form-control-default']) !!}
+                                                    {!! Form::selectYear('year', 1945, 2015, 2000, ['class' => 'form-control inscription-placeholder form-control-default']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -81,7 +79,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::text('taille', null, array('placeholder' => 'Votre taille (cm)*', 'class' => 'form-control form-control-default required')) !!}
+                                            {!! Form::text('taille', null, array('placeholder' => 'Votre taille (cm)*', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
                                             {!! $errors->first('taille', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
@@ -89,14 +87,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::text('club', null, array('placeholder' => 'Votre club*', 'id' => 'q', 'class' => 'form-control form-control-default required')) !!}
+                                            {!! Form::text('club', null, array('placeholder' => 'Votre club*', 'id' => 'q', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
                                             {!! Form::hidden('club_id', null, array('id' => 'i')) !!}
                                             {!! $errors->first('club', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group inscription-select">
-                                            {!! Form::select('poste', ['' => 'Séléctionner votre poste*', 'Meneur' => 'Meneur', 'Arrière' => 'Arrière', 'Ailier' => 'Ailier', 'Ailier Fort' => 'Ailier Fort', 'Pivot' => 'Pivot'], null, ['class' => 'form-control-default form-control']) !!}
+                                            {!! Form::select('poste', ['' => 'Séléctionner votre poste*', 'Meneur' => 'Meneur', 'Arrière' => 'Arrière', 'Ailier' => 'Ailier', 'Ailier Fort' => 'Ailier Fort', 'Pivot' => 'Pivot'], null, ['class' => 'form-control-default inscription-placeholder form-control']) !!}
                                             {!! $errors->first('poste', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>

@@ -30,3 +30,4 @@ Route::any('search/club', 'SearchController@autocomplete');
 Route::get('/timeline/{surname}{name}', 'PageController@timeline');
 Route::any('upload', 'PageController@postUpload');
 Route::any('add/game/', 'PageController@addGame');
+Route::any('game/validation', 'GameController@create');

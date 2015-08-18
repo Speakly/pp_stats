@@ -23,6 +23,7 @@
 
     @yield('content')
 
+<script>BASE_URL = '{{ URL::to("/") }}/' </script>
 <script type="text/javascript" src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>
 <script tupe="text/javascript" src="{{ URL::asset('assets/js/chat.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/essentials.js') }}"></script>
