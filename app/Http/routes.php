@@ -29,5 +29,6 @@ Route::any('search/club', 'SearchController@autocomplete');
 
 Route::get('/timeline/{surname}{name}', 'PageController@timeline');
 Route::any('upload', 'PageController@postUpload');
-Route::any('add/game/', 'PageController@addGame');
+Route::any('add/game/{id}', 'PageController@addGame');
 Route::any('game/validation', 'GameController@create');
+Route::any('game/{id}', 'GameController@show');

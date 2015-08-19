@@ -35,8 +35,7 @@ class PageController extends Controller
             
     }
 
-    public function addGame($id = null){
-        $id = Input::get('id');
+    public function addGame($id){
         $user = User::with('Club')->find($id);
 
         return view ('game.index', compact('user'));

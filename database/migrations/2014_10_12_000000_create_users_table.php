@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('surname');
             $table->string('poste');
             $table->integer('club_id');
-            $table->string('avatar');
             $table->string('taille');
             $table->date('birthday');
             $table->string('email')->unique();
