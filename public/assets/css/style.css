@@ -21,7 +21,14 @@ select {
 .inscription-placeholder::-moz-placeholder {
     color: #bd362f;
 }
-
+.panel-default > .panel-heading {
+    background-color: #ddd;
+    border-color: #bbb;
+    color: #333;
+}
+.panel-heading {
+	border-bottom:0px;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -215,10 +222,9 @@ input[type="file"] {
 }
 .game-container {
 	padding:30px;
-	padding-top: 100px;
 }
 .game-panel-default{
-	min-height: 400px;
+	min-height: 200px;
 }
 /*
 |--------------------------------------------------------------------------

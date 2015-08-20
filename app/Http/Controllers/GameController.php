@@ -70,6 +70,7 @@ class GameController extends Controller
         {
             $query->orderBy('date', 'ASC');
         }))->find($id);
+        
         return view('game.show', compact('user'));
     }
 

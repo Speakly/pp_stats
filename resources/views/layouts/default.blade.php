@@ -5,15 +5,18 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <meta name="_token" content="{!! csrf_token() !!}"/> --}}
-
+    <link href="{{ URL::asset('assets/css/all.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/skin-orange.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/app.less') }}" type="text/css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link href="{{ URL::asset('assets/css/all.css')}}" rel="stylesheet" type="text/css">
+
     <link href="{{ URL::asset('assets/css/app.css')}}" rel="stylesheet" type="text/css">
+    
     <link rel="stylesheet" href="{{ URL::asset('assets/css/skin-orange.css') }}" type="text/css">
     <!--<link href="{{ URL::asset('assets/css/fonts/font-awesome.css') }}" rel="stylesheet" type="text/css">-->
     <link rel="stylesheet" href="{{ URL::asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') }}" type="text/css">
+
     <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css') }}" type="text/css">
     
 
@@ -24,9 +27,13 @@
 </head>
 
 <body>
-
-    @yield('content')
-
+    <div class="st-container">
+        @include('layouts.sidebar')
+        <div class="st-pusher" id="content">
+            
+            @yield('content')
+        </div>
+    </div>
 <script>BASE_URL = '{{ URL::to("/") }}/' </script>
 <script type="text/javascript" src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>
 <script tupe="text/javascript" src="{{ URL::asset('assets/js/chat.js') }}"></script>

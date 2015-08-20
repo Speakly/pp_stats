@@ -92,13 +92,13 @@
             <div class="sidebar-block">
                 <div class="sidebar-photos">
                     <ul>
-                        @for($i=0;$i<=3;$i++)
+                        @foreach($user->game as $key => $game)
                             <li>
-                                <a href="#">Lakers vs Miami Heat</a>
-                            </li>
-                        @endfor
+                                <a href="{{ URL::action('GameController@show', $user->id) }}">{{ $game->name_adverse }}</a>
+                            </li><br><br>
+                        @endforeach
                     </ul>
-                    <a href="#" class="btn btn-primary btn-xs">view all</a>
+                    <!--<a href="#" class="btn btn-primary btn-xs">view all</a>-->
                 </div>
             </div>
             <div class="category">Last game</div>

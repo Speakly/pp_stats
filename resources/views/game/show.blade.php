@@ -1,13 +1,12 @@
-@extends('layouts.inscription')
+@extends('layouts.default')
 
 @section('css')
     
 @stop
 
 @section('content')
-<div class="st-container game-content">
-    @include('layouts.sidebar')
-	<div class="st-pusher" id="content" style="">
+
+	
         <div class="st-content">
             <!-- extra div for emulating position:fixed of the menu -->
             <div class="st-content-inner">
@@ -38,6 +37,9 @@
                 <div class="game-container">
                             <div class="panel panel-default game-panel-default">
                                 <div class="panel-heading panel-heading-gray">
+                                    <div class="pull-right">
+                                        <a class="btn btn-skin btn-xs" href="{{ URL::action('PageController@addGame', $user->id) }}">Ajouter un match <i class="fa fa-plus"></i></a>
+                                    </div>
                                     <i class="fa fa-fw fa-info-circle"></i> Game
                                 </div>
                                 <br>
@@ -188,8 +190,7 @@
         <footer class="footer">
         <strong>ThemeKit</strong> v4.0.0 &copy; Copyright 2015
         </footer>
-    </div>
-</div>
+ 
 @stop
 
 @section('scripts')
