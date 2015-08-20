@@ -36,8 +36,6 @@
                 </nav>
                 
                 <div class="game-container">
-                    <div class="row">
-                        <div class="col-md-6">
                             <div class="panel panel-default game-panel-default">
                                 <div class="panel-heading panel-heading-gray">
                                     <i class="fa fa-fw fa-info-circle"></i> Game
@@ -88,8 +86,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="panel panel-default game-panel-default">
                                 <div class="panel-heading panel-heading-gray">
                                     <!--<a href="#" class="btn btn-white btn-xs pull-right"><i class="fa fa-pencil"></i></a>-->
@@ -186,9 +182,6 @@
                                 </div>
                                 
                             </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
