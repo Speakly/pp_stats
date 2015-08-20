@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Input;
 use App\Game;
+use App\User;
+use Input;
+use Redirect;
+use Auth;
 
 class GameController extends Controller
 {
@@ -18,7 +21,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        //Auth::
     }
 
     /**
@@ -29,18 +32,19 @@ class GameController extends Controller
     public function create()
     {
         $data = Input::all();
-        
+        $id = $data['user_id'];
+        $date = date("Y-m-d", strtotime($data['date']));
         $data = array(
+                "club_id" => $data['club_id_user'],
+                "domicile" => $data['domicile'],
                 "game_team_id_1" => $data['club_id_user'],
                 "game_team_id_2" => $data['club_id'],
-                "date" => $data['date'],
-                "club_id" => $data['club_id_user'],
-                "domicile" => $data['domicile']
-            );
+                "name_adverse" => $data['club_adverse'],
+                "date" => $date        
+        );
+        $game = Game::create($data);
 
-            $game = Game::create($data);
-        dd($game);
-        return 'bravo';
+        return Redirect::action('GameController@show', compact('id'));
     }
 
     /**
@@ -62,7 +66,11 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::with(array('Game' => function($query)
+        {
+            $query->orderBy('date', 'ASC');
+        }))->find($id);
+        return view('game.show', compact('user'));
     }
 
     /**

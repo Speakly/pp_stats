@@ -48,7 +48,7 @@
         <div class="st-content">
             <!-- extra div for emulating position:fixed of the menu -->
             <div class="st-content-inner">
-                <h1 class="text-center">Renseigne ton prochain match sur Profilplayers Basket</h1>
+                <h1 class="text-center">Tes matchs sur Profilplayers Basket</h1>
                 <div class="container">
                     <div class="panel panel-default">
                         <div class="panel-heading panel-heading-gray">
@@ -56,48 +56,57 @@
                             <i class="fa fa-fw fa-info-circle"></i> Game
                         </div>
                         <br>
-                        <p class="text-center inscription-txt">Renseigne les champs suivant afin de renseigner ta prochaine rencontre. <br>Tu pourra ensuite, une fois le match passé, renseigner ton analyse de match et suivre tes statisitques de jeu.</p>
-                        <br>
-                        <div class="panel-body">
-                            {!! Form::open([
-                                'method' => 'POST',
-                                'action' => 'GameController@create',
-                                'enctype' => 'multipart/form-data'
-                                ])
-                            !!}
-                                {!! Form::hidden('user_id', $user->id) !!}
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!! Form::text('club', $user->club->nom, array('placeholder' => 'Votre club*', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
-                                            {!! Form::hidden('club_id_user', $user->club->id) !!}
-                                            {!! $errors->first('club', '<small class="help-block">:message</small>') !!}
+                        <div class="panel-body text-center">
+                            <div class="row">
+                            
+                        	@foreach($user->game as $key => $game)
+                            <!-- 1 = domicile -->
+                                @if($game->domicile == 1)
+    	                            <div class="row">
+                                        <div class="col-md-2">
+                                            {{ $game->date }}
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group inscription-select">
-                                            {!! Form::text('club_adverse', null, array('placeholder' => 'Le club adverse*', 'id' => 'q', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
-                                            {!! Form::hidden('club_id', null, array('id' => 'i')) !!}
-                                            {!! $errors->first('club_adverse', '<small class="help-block">:message</small>') !!}
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-5 game-clubmine">{{ $user->club->nom }}</div>
+                                                <div class="col-md-2">vs</div>
+                                                <div class="col-md-5">{{ $game->name_adverse }}</div>
+                                            </div>
                                         </div>
+                                        <div class="col-md-2">
+                                            @if($game->date < date('Y-m-d'))
+                                                <a href="#"><button class="homepage-btn">Analyser mon match</button></a>
+                                            @endif
+                                        </div>	                            	
+    	                            </div>
+                                    <br>
+                                    
+                                    
+                                @elseif($game->domicile == 0)
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            {{ $game->date }}
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-5">{{ $game->name_adverse }}</div>
+                                                <div class="col-md-2">vs</div>
+                                                <div class="col-md-5 game-clubmine">{{ $user->club->nom }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @if($game->date < date('Y-m-d'))
+                                                <a href="#"><button class="homepage-btn">Analyser mon match</button></a>
+                                            @endif
+                                        </div>                                  
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6"> 
-                                		<p>Date: <input type="text" id="datepicker" name="date"></p>
-                                	</div>
-                                	<div class='col-md-6'>
-                                		<p> Match à domicile ?</p>
-                                		Oui {!! Form::radio('domicile', 1, 'oui') !!}
-										Non {!! Form::radio('domicile', 0, 'non') !!}
-                                	</div>
-                                </div>
-                                <div class="text-center inscription-btn btn-submit-form">
-                                    {!! Form::submit('Renseigner mon match', ['class' => 'btn btn-skin']) !!}
-                                </div>
-                            {!! Form::close() !!}
+                                    <br>
+                                @endif
+	                        @endforeach
+
                         </div>
                     </div>
+                    <p class="text-center">Une fois ton / tes matchs passés, tu pourras faire ton analyse de match (score, passe, rebond, paniers, min joués...)</p>
                 </div>
             </div>
         </div>
