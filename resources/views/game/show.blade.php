@@ -44,52 +44,48 @@
                                 </div>
                                 <br>
                                 <div class="panel-body text-center">
-                                    <div class="row">
-                                        @foreach($user->game as $key => $game)
+                                    @foreach($user->game as $key => $game)
                                         <!-- 1 = domicile -->
-                                            @if($game->domicile == 1)
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        {{ $game->date }}
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-5 game-clubmine">{{ $user->club->nom }}</div>
-                                                            <div class="col-md-2">vs</div>
-                                                            <div class="col-md-5">{{ $game->name_adverse }}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        @if($game->date < date('Y-m-d'))
-                                                            <a href="#"><button class="homepage-btn">Analyser mon match</button></a>
-                                                        @endif
-                                                    </div>                                  
+                                        @if($game->domicile == 1)
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    {{ $game->date }}
                                                 </div>
-                                                <br>
-                                                
-                                                
-                                            @elseif($game->domicile == 0)
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        {{ $game->date }}
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <div class="col-md-5 game-clubmine">{{ $user->club->nom }}</div>
+                                                        <div class="col-md-2">vs</div>
+                                                        <div class="col-md-5">{{ $game->name_adverse }}</div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-5">{{ $game->name_adverse }}</div>
-                                                            <div class="col-md-2">vs</div>
-                                                            <div class="col-md-5 game-clubmine">{{ $user->club->nom }}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        @if($game->date < date('Y-m-d'))
-                                                            <a href="#"><button class="homepage-btn">Analyser mon match</button></a>
-                                                        @endif
-                                                    </div>                                  
                                                 </div>
-                                                <br>
-                                            @endif
-                                        @endforeach
-                                    </div>
+                                                <div class="col-md-2">
+                                                    @if($game->date < date('Y-m-d'))
+                                                    <a href="#"><button class="homepage-btn">Analyser mon match</button></a>
+                                                    @endif
+                                                </div>                                  
+                                            </div>
+                                            <br>
+                                        @elseif($game->domicile == 0)
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    {{ $game->date }}
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <div class="col-md-5">{{ $game->name_adverse }}</div>
+                                                        <div class="col-md-2">vs</div>
+                                                        <div class="col-md-5 game-clubmine">{{ $user->club->nom }}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @if($game->date < date('Y-m-d'))
+                                                    <a href="#"><button class="homepage-btn">Analyser mon match</button></a>
+                                                    @endif
+                                                </div>                                  
+                                            </div>
+                                            <br>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
