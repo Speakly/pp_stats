@@ -106,6 +106,7 @@
 
                         </div>
                     </div>
+                    <p class="text-center">Une fois ton / tes matchs passés, tu pourras faire ton analyse de match (score, passe, rebond, paniers, min joués...)</p>
                 </div>
             </div>
         </div>
