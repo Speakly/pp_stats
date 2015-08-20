@@ -87,9 +87,7 @@ body {
 	position: relative;
 	bottom: 0;
 }
-#homepage-cover {
-	max-height: 200px;
-}
+
 /* Surcharge row timeline */
 .timeline {
 	margin-left:0 !important;
