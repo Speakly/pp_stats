@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/skin-orange.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/app.less') }}" type="text/css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="{{ URL::asset('assets/css/all.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('assets/css/app.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/skin-orange.css') }}" type="text/css">
     <!--<link href="{{ URL::asset('assets/css/fonts/font-awesome.css') }}" rel="stylesheet" type="text/css">-->
     <link rel="stylesheet" href="{{ URL::asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css') }}" type="text/css">
