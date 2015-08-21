@@ -1,4 +1,4 @@
-@extends('layouts.inscription')
+@extends('layouts.default')
 
 @section('css')
     <link href="{{ URL::asset('assets/css/app.css')}}" rel="stylesheet" type="text/css">
@@ -7,47 +7,14 @@
 @stop
 
 @section('content')
-	<div class="navbar navbar-main navbar-primary navbar-fixed-top" role="navigation">
-      	<div class="container-fluid">
-        	<div class="navbar-header">
-          		<a href="#sidebar-menu" data-effect="st-effect-1" data-toggle="sidebar-menu" class="toggle pull-left visible-xs"><i class="fa fa-ellipsis-v"></i></a>
-		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-		            <span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		        </button>
-          		<a href="#sidebar-chat" data-toggle="sidebar-menu" data-effect="st-effect-1" class="toggle pull-right visible-xs"><i class="fa fa-comments"></i></a>
-          		<a class="navbar-brand" href="index.html">Profilplayers</a>
-        	</div>
-        	<div class="collapse navbar-collapse" id="main-nav">
-          		<ul class="nav navbar-nav"></ul>
-          		<ul class="nav navbar-nav navbar-right">
-            		
-            		<!-- User -->
-		            <li class="dropdown">
-		              	<a href="#" class="homepage-nav-user dropdown-toggle user" data-toggle="dropdown">
-		              		
-		              		@if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
-		                		<img src="{{ URL::asset('images/logos/' . $user->id .'.png') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
-		                	@elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
-		                		<img src="{{ URL::asset('images/logos/' . $user->id .'.jpg') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
-		              		@endif
-		              	</a>
-		              	<ul class="dropdown-menu" role="menu">
-			                <li><a href="user-private-profile.html">Profile</a></li>
-			                <li><a href="user-private-messages.html">Messages</a></li>
-			                <li><a href="{{ URL::action('PageController@logout') }}">Logout</a></li>
-		              	</ul>
-		            </li>
-		        </ul>
-        	</div>
-      	</div>
-    </div>
-	<div class="st-pusher" id="content" style="margin-top:50px;margin-left:0px !important">
+	
+	<div class="st-pusher" id="content" style="margin-left:0px !important">
         <div class="st-content">
             <!-- extra div for emulating position:fixed of the menu -->
             <div class="st-content-inner">
+
+                @include('layouts.navbar')
+
                 <h1 class="text-center">Renseigne ton prochain match sur Profilplayers Basket</h1>
                 <div class="container">
                     <div class="panel panel-default">
@@ -102,7 +69,9 @@
             </div>
         </div>
     </div>
-	
+
+	@include('layouts.footer')
+    
 @stop
 
 @section('scripts')

@@ -3,7 +3,9 @@
 | General
 |--------------------------------------------------------------------------
 */
-
+body {
+	color:#777777 !important;
+}
 h1, .skin-color, {
 	color:#e74c3c !important;
 }
