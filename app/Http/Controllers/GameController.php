@@ -74,6 +74,17 @@ class GameController extends Controller
         return view('game.show', compact('user'));
     }
 
+    public function analyse($id, $userId){
+        $user = User::with('club')->find($userId);
+        $game = Game::find($id);
+        return view('game.analyse', compact('user', 'game'));
+    }
+
+    public function addAnalyse(){
+        $data = Input::all();
+        return $data;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

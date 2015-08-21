@@ -22,7 +22,11 @@
                     <!-- User -->
                     <li class="dropdown">
                         <a href="#" class="homepage-nav-user dropdown-toggle user" data-toggle="dropdown">
-                            <img src="{{ URL::asset('assets/images/guy.jpg') }}" alt="profile-picture" class="img-circle" width="40" /> 
+                            @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
+                                <img src="{{ URL::asset('images/logos/' . $user->id .'.png') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
+                            @elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
+                                <img src="{{ URL::asset('images/logos/' . $user->id .'.jpg') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
+                            @endif 
                             @if(isset($user))
                                 {{ $user->surname }}
                             @endif 
@@ -81,7 +85,12 @@
         <div data-scrollable>
             <div class="sidebar-block">
                 <div class="profile">
-                    <img src="{{ URL::asset('assets/images/guy.jpg') }}" alt="people" class="img-circle" />
+                    @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
+                        <img src="{{ URL::asset('images/logos/' . $user->id .'.png') }}" alt="profile-picture" class="img-circle" width="100"/> 
+                    @elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
+                        <img src="{{ URL::asset('images/logos/' . $user->id .'.jpg') }}" alt="profile-picture" class="img-circle" width="100"/> 
+                    @endif 
+                    
                     <h4>
                         @if(isset($user))
                             {{$user->surname}} <br> {{ $user->name }}</h4>

@@ -35,21 +35,35 @@
         </div>
     </div>
 <script>BASE_URL = '{{ URL::to("/") }}/' </script>
-<script type="text/javascript" src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}"></script>
-<script tupe="text/javascript" src="{{ URL::asset('assets/js/chat.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/essentials.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/layout.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/maps.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/media.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/player.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/sidebar.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/timeline.js') }}"></script>
+
+<script type="text/javascript" src="{{ URL::asset('assets/js/vendor/all.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/app.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/all.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/main.js') }}"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-<script type="text/javascript" src="{{ URL::asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js') }}"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        function stripTrailingSlash(str) {
+            if(str.substr(-1) == '/') {
+              return str.substr(0, str.length - 1);
+            }
+            return str;
+        }
+
+        var url = window.location.pathname;  
+        var activePage = stripTrailingSlash(url);
+
+        $('.nav li a').each(function(){  
+            var currentPage = stripTrailingSlash($(this).attr('href'));
+
+            if (activePage == currentPage) {
+                $(this).parent().addClass('active'); 
+            } 
+        });
+    });
+
+</script>
 
 @yield('scripts')
 
