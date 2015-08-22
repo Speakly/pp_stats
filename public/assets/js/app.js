@@ -958,7 +958,7 @@ module.exports = (function () {
     $('.tabbable .nav-tabs').each(function(){
         var tabs = $(this).niceScroll({
             cursorborder: 0,
-            cursorcolor: config.skins[ skin ][ 'primary-color' ],
+            cursorcolor: [ 'primary-color' ],
             horizrailenabled: true,
             oneaxismousemode: true
         });
@@ -1698,7 +1698,7 @@ module.exports = function(urls, callback) {
 
         var nice = this.niceScroll({
             cursorborder: 0,
-            cursorcolor: config.skins[ skin ][ 'primary-color' ],
+            cursorcolor: [ 'primary-color' ],
             horizrailenabled: settings.horizontal
         });
 
@@ -2072,15 +2072,15 @@ window.onload = loadScript;
 
 function initScripts() {
     var $scripts = [
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.extensions.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.services.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.microdata.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.microformat.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.overlays.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.rdfa.js",
-        "js/vendor/maps/google/jquery-ui-map/addons/infobox_packed.js",
-        "js/vendor/maps/google/jquery-ui-map/addons/markerclusterer.min.js"
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.extensions.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.services.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.microdata.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.microformat.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.overlays.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.rdfa.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/addons/infobox_packed.js",
+        BASE_URL + "js/vendor/maps/google/jquery-ui-map/addons/markerclusterer.min.js"
     ];
 
     $.each($scripts, function (k, v) {

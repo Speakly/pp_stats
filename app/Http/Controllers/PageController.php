@@ -35,10 +35,10 @@ class PageController extends Controller
             
     }
 
-    public function addGame($id){
+    public function addGame($id, $page = 'game'){
         $user = User::with('Club')->find($id);
 
-        return view ('game.index', compact('user'));
+        return view ('game.index', compact('user', 'page'));
     }
 
     public function logout() {

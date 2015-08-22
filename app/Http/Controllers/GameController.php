@@ -70,7 +70,19 @@ class GameController extends Controller
         {
             $query->orderBy('date', 'ASC');
         }))->find($id);
+        
         return view('game.show', compact('user'));
+    }
+
+    public function analyse($id, $userId){
+        $user = User::with('club')->find($userId);
+        $game = Game::find($id);
+        return view('game.analyse', compact('user', 'game'));
+    }
+
+    public function addAnalyse(){
+        $data = Input::all();
+        return $data;
     }
 
     /**

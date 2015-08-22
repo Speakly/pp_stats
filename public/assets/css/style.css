@@ -3,7 +3,10 @@
 | General
 |--------------------------------------------------------------------------
 */
-
+body {
+	color:#777777 !important;
+	font-weight: 500 !important;
+}
 h1, .skin-color, {
 	color:#e74c3c !important;
 }
@@ -21,7 +24,14 @@ select {
 .inscription-placeholder::-moz-placeholder {
     color: #bd362f;
 }
-
+.panel-default > .panel-heading {
+    background-color: #ddd;
+    border-color: #bbb;
+    color: #333;
+}
+.panel-heading {
+	border-bottom:0px;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -215,13 +225,40 @@ input[type="file"] {
 }
 .game-container {
 	padding:30px;
-	padding-top: 100px;
 }
 .game-panel-default{
-	min-height: 400px;
+	min-height: 200px;
 }
 /*
 |--------------------------------------------------------------------------
 | End Game
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Analyse Game
+|--------------------------------------------------------------------------
+*/
+.analyse {
+	margin-top:50px;
+}
+#analyse-stats div{
+	text-align: left;
+}
+.analyse-panel-default{
+	padding: 50px;
+	font-size:16px;
+}
+.analyse-score {
+	width: 40px;
+}
+.analyse-playground img{
+	height: 550px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| End Analyse Game
 |--------------------------------------------------------------------------
 */

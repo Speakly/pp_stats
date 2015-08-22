@@ -22,7 +22,15 @@
                     <!-- User -->
                     <li class="dropdown">
                         <a href="#" class="homepage-nav-user dropdown-toggle user" data-toggle="dropdown">
-                            <img src="{{ URL::asset('assets/images/guy.jpg') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
+                            @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
+                                <img src="{{ URL::asset('images/logos/' . $user->id .'.png') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
+                            @elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
+                                <img src="{{ URL::asset('images/logos/' . $user->id .'.jpg') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
+                            @endif 
+                            @if(isset($user))
+                                {{ $user->surname }}
+                            @endif 
+                            <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="user-private-profile.html">Profile</a></li>
@@ -54,12 +62,13 @@
             		<!-- User -->
 		            <li class="dropdown">
 		              	<a href="#" class="homepage-nav-user dropdown-toggle user" data-toggle="dropdown">
-		              		
-		              		@if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
-		                		<img src="{{ URL::asset('images/logos/' . $user->id .'.png') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
-		                	@elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
-		                		<img src="{{ URL::asset('images/logos/' . $user->id .'.jpg') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
-		              		@endif
+		              		@if(isset($user))
+    		              		@if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
+    		                		<img src="{{ URL::asset('images/logos/' . $user->id .'.png') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
+    		                	@elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
+    		                		<img src="{{ URL::asset('images/logos/' . $user->id .'.jpg') }}" alt="profile-picture" class="img-circle" width="40" /> {{ $user->surname }} <span class="caret"></span>
+    		              		@endif
+                            @endif
 		              	</a>
 		              	<ul class="dropdown-menu" role="menu">
 			                <li><a href="user-private-profile.html">Profile</a></li>
@@ -76,8 +85,16 @@
         <div data-scrollable>
             <div class="sidebar-block">
                 <div class="profile">
-                    <img src="{{ URL::asset('assets/images/guy.jpg') }}" alt="people" class="img-circle" />
-                    <h4>{{$user->surname}} <br> {{ $user->name }}</h4>
+                    @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
+                        <img src="{{ URL::asset('images/logos/' . $user->id .'.png') }}" alt="profile-picture" class="img-circle" width="100"/> 
+                    @elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
+                        <img src="{{ URL::asset('images/logos/' . $user->id .'.jpg') }}" alt="profile-picture" class="img-circle" width="100"/> 
+                    @endif 
+                    
+                    <h4>
+                        @if(isset($user))
+                            {{$user->surname}} <br> {{ $user->name }}</h4>
+                        @endif
                 </div>
             </div>
             <div class="category">Statistiques Saison</div>
@@ -92,13 +109,15 @@
             <div class="sidebar-block">
                 <div class="sidebar-photos">
                     <ul>
-                        @for($i=0;$i<=3;$i++)
-                            <li>
-                                <a href="#">Lakers vs Miami Heat</a>
-                            </li>
-                        @endfor
+                        @if(isset($user))
+                            @foreach($user->game as $key => $game)
+                                <li>
+                                    <a href="{{ URL::action('GameController@show', $user->id) }}">{{ $game->name_adverse }}</a>
+                                </li><br><br>
+                            @endforeach
+                        @endif
                     </ul>
-                    <a href="#" class="btn btn-primary btn-xs">view all</a>
+                    <!--<a href="#" class="btn btn-primary btn-xs">view all</a>-->
                 </div>
             </div>
             <div class="category">Last game</div>
