@@ -7,7 +7,7 @@
 	<!-- content -->                      
     <div class="row">
         <!-- main col left -->
-        <div class="col-sm-2">
+        <div class="col-sm-4 col-xs-4 col-md-3 col-lg-2">
             <div class="qw rd aof alt">
                 <div class="qy"></div>
                 <div class="qx dj text-center">
@@ -55,7 +55,7 @@
         </div>
 
         <!-- main col right -->
-        <div class="col-sm-7">
+        <div class="col-sm-5 col-xs-5 col-md-6 col-lg-7">
 
             <div class="well"> 
                 <form class="form-horizontal" role="form">
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-md-3">
             <div class="panel panel-default">
                 <div class="panel-thumbnail"><img src="/assets/example/bg_5.jpg" class="img-responsive"></div>
                 <div class="panel-body">
