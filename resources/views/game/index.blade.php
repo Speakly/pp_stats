@@ -1,9 +1,6 @@
 @extends('layouts.default')
 
 @section('css')
-    <link href="{{ URL::asset('assets/css/app.css')}}" rel="stylesheet" type="text/css">
-    
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/skin-orange.css') }}" type="text/css">
 @stop
 
 @section('content')
