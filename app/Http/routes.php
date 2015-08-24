@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PageController@index');
+Route::get('/home', 'PageController@home');
 // Inscription - Connexion - Profile
 Route::any('inscription', 'ConnexionController@inscription');
 Route::get('profile', 'ConnexionController@profile');
@@ -19,6 +20,7 @@ Route::any('profile/update', 'ConnexionController@updateProfile');
 Route::any('home/connexion', 'ConnexionController@connexion');
 Route::get('user/logout', 'PageController@logout');
 Route::any('search/club', 'SearchController@autocomplete');
+
 
 
 /*
