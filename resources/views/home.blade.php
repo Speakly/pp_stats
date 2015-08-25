@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Prochain match</h4></div>
+                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Prochain match</h4></div>
                 <div class="panel-body">
                     <div class="list-group">
                         <a href="http://bootply.com/tagged/datatable" class="list-group-item">Sable Basket</a>
@@ -43,7 +43,7 @@
               </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Derniers matchs</h4></div>
+                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Derniers matchs</h4></div>
                 <div class="panel-body">
                     <div class="list-group">
                         <a href="http://bootply.com/tagged/modal" class="list-group-item">Pau Orthez</a>
@@ -55,7 +55,7 @@
         </div>
 
         <!-- main col right -->
-        <div class="col-sm-5 col-xs-5 col-md-6 col-lg-7">
+        <div id="main-center" class="col-sm-5 col-xs-5 col-md-6 col-lg-7">
 
             <div class="well"> 
                 <form class="form-horizontal" role="form">
@@ -101,18 +101,13 @@
         </div>
         <div class="col-sm-3 col-md-3">
             <div class="panel panel-default">
-                <div class="panel-thumbnail"><img src="/assets/example/bg_5.jpg" class="img-responsive"></div>
+                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques</h4></div>
                 <div class="panel-body">
-                    <p class="lead">Urbanization</p>
-                    <p>45 Followers, 13 Posts</p>
-
-                    <p>
-                        <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" width="28px" height="28px">
-                    </p>
+                    <p>120 minutes<br>13 points<br>8 rebonds<br> 3 passes</p>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Bootstrap Examples</h4></div>
+                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques dernier match</h4></div>
                 <div class="panel-body">
                     <div class="list-group">
                         <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
@@ -120,17 +115,6 @@
                         <a href="http://bootply.com/tagged/datatable" class="list-group-item">Data Grids</a>
                   </div>
               </div>
-            </div>
-            
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>More Templates</h4></div>
-                <div class="panel-body">
-                    <img src="//placehold.it/150x150" class="img-circle pull-right"> <a href="#">Free @Bootply</a>
-                    <div class="clearfix"></div>
-                    There a load of new free Bootstrap 3 ready templates at Bootply. All of these templates are free and don't require extensive customization to the Bootstrap baseline.
-                    <hr>
-                    <ul class="list-unstyled"><li><a href="http://www.bootply.com/templates">Dashboard</a></li><li><a href="http://www.bootply.com/templates">Darkside</a></li><li><a href="http://www.bootply.com/templates">Greenfield</a></li></ul>
-                </div>
             </div>
         </div>
     </div><!--/row-->

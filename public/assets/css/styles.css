@@ -346,3 +346,10 @@ small.text-muted {
 .well{
   background-color: #FFF !important;
 }
+#main-center .panel {
+  margin-bottom: 10px;
+}
+a:hover, a:focus {
+    color: #e74c3c;
+    text-decoration: none;
+}
