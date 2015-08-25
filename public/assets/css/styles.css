@@ -80,7 +80,14 @@ hr {
   position:fixed;
   width:inherit;
 }
-
+.btn-color-site{
+  background-color:#c0392b;
+  color:#FFF;
+}
+.btn-color-site:hover {
+  color:#FFF;
+  background-color:#e74c3c; 
+}
 .navbar-blue li > a,.navbar-toggle  {
    color:#efefef;
 }
@@ -146,6 +153,8 @@ hr {
 }
 #footer {
   margin-bottom:20px;
+  margin-top:30px;
+  background-color: #FFF;
 }
 
 /* bootstrap overrides */
@@ -333,4 +342,7 @@ small.text-muted {
 }
 .alt {
     margin-bottom: 30px !important;
+}
+.well{
+  background-color: #FFF !important;
 }

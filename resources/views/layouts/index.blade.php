@@ -35,7 +35,7 @@
                   	<nav class="collapse navbar-collapse" role="navigation">
                     <form class="navbar-form navbar-left">
                         <div class="input-group input-group-sm" style="max-width:360px;">
-                          <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                          <input type="text" class="form-control" placeholder="Rechercher" name="srch-term" id="srch-term">
                           <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                           </div>
@@ -85,28 +85,29 @@
 
 <!--post modal-->
 <div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			Ajoutes ton match
-      </div>
-      <div class="modal-body">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>Ajoutes ton match
+        </div>
+        <div class="modal-body">
           <form class="form center-block">
             <div class="form-group">
               <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
             </div>
           </form>
-      </div>
-      <div class="modal-footer">
+        </div>
+        <div class="modal-footer">
           <div>
-          <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Ajouter</button>
-            <!--<ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>-->
-		  </div>	
+            <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Ajouter</button>
+              <!--<ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>-->
+  		    </div>	
+        </div>
       </div>
-  </div>
   </div>
 </div>
+
+
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>

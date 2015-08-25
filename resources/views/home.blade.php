@@ -59,11 +59,11 @@
 
             <div class="well"> 
                 <form class="form-horizontal" role="form">
-                    <h4>What's New</h4>
+                    <h4>Publier quelque chose</h4>
                     <div class="form-group" style="padding:14px;">
-                        <textarea class="form-control" placeholder="Update your status"></textarea>
+                        <textarea class="form-control" placeholder="Exprimez-vous"></textarea>
                     </div>
-                    <button class="btn btn-primary pull-right" type="button">Post</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                    <button class="btn btn-color-site pull-right" type="button">Poster</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
                 </form>
             </div>
 
@@ -96,31 +96,6 @@
                       </div>
                   </form>
 
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Portlet Heading</h4></div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Modals</li>
-                        <li class="list-group-item">Sliders / Carousel</li>
-                        <li class="list-group-item">Thumbnails</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-thumbnail"><img src="/assets/example/bg_4.jpg" class="img-responsive"></div>
-                <div class="panel-body">
-                    <p class="lead">Social Good</p>
-                    <p>1,200 Followers, 83 Posts</p>
-
-                    <p>
-                        <img src="https://lh6.googleusercontent.com/-5cTTMHjjnzs/AAAAAAAAAAI/AAAAAAAAAFk/vgza68M4p2s/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                        <img src="https://lh4.googleusercontent.com/-6aFMDiaLg5M/AAAAAAAAAAI/AAAAAAAABdM/XjnG8z60Ug0/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                        <img src="https://lh4.googleusercontent.com/-9Yw2jNffJlE/AAAAAAAAAAI/AAAAAAAAAAA/u3WcFXvK-g8/s28-c-k-no/photo.jpg" width="28px" height="28px">
-                    </p>
                 </div>
             </div>
         </div>
@@ -157,31 +132,12 @@
                     <ul class="list-unstyled"><li><a href="http://www.bootply.com/templates">Dashboard</a></li><li><a href="http://www.bootply.com/templates">Darkside</a></li><li><a href="http://www.bootply.com/templates">Greenfield</a></li></ul>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4>What Is Bootstrap?</h4></div>
-                <div class="panel-body">
-                    Bootstrap is front end frameworkto build custom web applications that are fast, responsive &amp; intuitive. It consist of CSS and HTML for typography, forms, buttons, tables, grids, and navigation along with custom-built jQuery plug-ins and support for responsive layouts. With dozens of reusable components for navigation, pagination, labels, alerts etc..                          
-                </div>
-            </div>
         </div>
     </div><!--/row-->
 
-    <div class="row">
-        <div class="col-sm-6">
-            <a href="#">Twitter</a> <small class="text-muted">|</small> <a href="#">Facebook</a> <small class="text-muted">|</small> <a href="#">Google+</a>
-        </div>
-    </div>
+    
 
-    <div class="row" id="footer">    
-        <div class="col-sm-6">
-
-        </div>
-        <div class="col-sm-6">
-            <p>
-                <a href="#" class="pull-right">©Copyright 2013</a>
-            </p>
-        </div>
-    </div>
+    
 
 
                       
