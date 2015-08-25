@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Redirect;
 use App\User;
+use App\Game;
 use Input;
 use Validator;
 use Response;
@@ -32,8 +33,13 @@ class PageController extends Controller
     public function timeline($name, $surname) {
 
         if(Auth::id()){
-            $user = User::find(Auth::id());
-            return view ('timeline.index', compact('user'));
+            $user = User::with('game')->find(Auth::id());
+            $games = count($user->game);
+            $victory = 1;
+            $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
+            $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
+
+            return view ('timeline.home', compact('user', 'games', 'victory', 'gamesPast', 'nextGame'));
         }
         else return Redirect::action('PageController@index');
             

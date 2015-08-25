@@ -4,7 +4,8 @@
 @stop
 
 @section('content')
-	<!-- content -->                      
+
+	<!-- content -->                     
     <div class="row">
         <!-- main col left -->
         <div class="col-sm-4 col-xs-4 col-md-3 col-lg-2">
@@ -17,18 +18,18 @@
                     <h5 class="qz">
                         <a href="/application/profile/" class="akt">Amaury Leproux</a>
                     </h5>
-                    <p class="alt">Meneur de jeu d'1m72 au club Le Mans Sarthe Basket</p>
+                    <p class="alt">{{ $user->poste }}, {{ $user->taille }}cm, joue au club <span style="font-weight:bold;">{{ $user->club->nom }}</span></p>
                     <ul class="aoh">
                         <li class="aoi">
                             <a data-toggle="modal" class="akt" href="#userModal">
                                 Matchs
-                                <h5 class="alh">550</h5>
+                                <h5 class="alh">{{ $games }}</h5>
                             </a>
                         </li>
                         <li class="aoi">
                             <a data-toggle="modal" class="akt" href="#userModal">
                                 Victoires
-                                <h5 class="alh">300</h5>
+                                <h5 class="alh">{{ $victory }}</h5>
                             </a>
                         </li>
                     </ul>
@@ -38,7 +39,7 @@
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Prochain match</h4></div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Sable Basket</a>
+                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">{{$nextGame->name_adverse}}</a>
                   </div>
               </div>
             </div>
@@ -46,9 +47,9 @@
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Derniers matchs</h4></div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="http://bootply.com/tagged/modal" class="list-group-item">Pau Orthez</a>
-                        <a href="http://bootply.com/tagged/datetime" class="list-group-item">ASVEL</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Barcelone</a>
+                        @foreach($gamesPast as $gamePast)
+                            <a href="#" class="list-group-item">{{$gamePast->name_adverse}}</a>
+                        @endforeach
                   </div>
               </div>
             </div>
@@ -110,9 +111,11 @@
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques dernier match</h4></div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="http://bootply.com/tagged/modal" class="list-group-item">Modal / Dialog</a>
-                        <a href="http://bootply.com/tagged/datetime" class="list-group-item">Datetime Examples</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Data Grids</a>
+                        <a href="http://bootply.com/tagged/modal" class="list-group-item">Minutes : </a>
+                        <a href="http://bootply.com/tagged/datetime" class="list-group-item">Points :</a>
+                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Passe :</a>
+                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Rebonds :</a>
+                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Résultat :</a>
                   </div>
               </div>
             </div>

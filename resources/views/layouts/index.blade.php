@@ -12,6 +12,8 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="{{ URL::asset('assets/css/styles.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
 	</head>
 	<body>
 <div class="wrapper">
@@ -90,27 +92,78 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>Ajoutes ton match
         </div>
-        <div class="modal-body">
-          <form class="form center-block">
-            <div class="form-group">
-              <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
+        {!! Form::open([
+            'method' => 'POST',
+            'action' => 'GameController@create',
+            'enctype' => 'multipart/form-data'
+            ])
+        !!}
+          <div class="modal-body">
+            {!! Form::hidden('club_id_user', $user->club->id) !!}
+            {!! Form::hidden('club_id', null, array('id' => 'i')) !!}
+            {!! Form::hidden('user_id', $user->id) !!}
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label class="control-label">Club adverse</label>
+              </div>
+              <div class="col-md-9">
+                {!! Form::text('club_adverse', null, array('placeholder' => 'Le club adverse*', 'id' => 'q', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
+              </div>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <div>
-            <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Ajouter</button>
-              <!--<ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>-->
-  		    </div>	
-        </div>
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label class="control-label">Date</label>
+              </div>
+              <div class="col-md-9">
+                <input type="text" id="datepicker" name="date">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label class="control-label">A domicile ?</label>
+              </div>
+              <div class="col-md-9">
+                Oui {!! Form::radio('domicile', 1, 'oui') !!}
+                Non {!! Form::radio('domicile', 0, 'non') !!}
+              </div>
+            </div>    
+          </div>
+          <div class="modal-footer text-center">
+            <div>
+              <div class="text-center inscription-btn btn-submit-form">
+                {!! Form::submit('Ajouter', ['class' => 'btn btn-color-site']) !!}
+              </div>
+              </div>  
+          </div>
+        {!! Form::close() !!}
       </div>
   </div>
 </div>
 
 
 	<!-- script references -->
+    <script>BASE_URL = '{{ URL::to("/") }}/' </script>
+    
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 		<script src="{{ URL::asset('assets/js/scripts.js') }}"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function()
+        {
+            $( "#q" ).autocomplete({
+                source: BASE_URL + "search/club",
+                minLength: 3,
+                select: function(event, ui) {
+                    $('#q').val(ui.item.value);
+                    $('#i').val(ui.item.id);
+                }
+            });
+        });
+          $(function() {
+        $( "#datepicker" ).datepicker();
+      });
+    </script>
 	</body>
 </html>
