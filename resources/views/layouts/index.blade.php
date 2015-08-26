@@ -11,6 +11,7 @@
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+    <!--<link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">-->
 		<link href="{{ URL::asset('assets/css/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   
@@ -45,13 +46,13 @@
                     </form>
                     <ul class="nav navbar-nav">
                       <li>
-                        <a href="#"><i class="glyphicon glyphicon-home"></i> Accueil</a>
+                        <a href="{{ URL::action('PageController@timeline', [$user->surname, $user->name]) }}"><i class="glyphicon glyphicon-home"></i> Accueil</a>
                       </li>
                       <li>
                         <a href="#"><i class="glyphicon glyphicon-signal"></i> Statistiques</a>
                       </li>
                       <li>
-                        <a href="#"><i class="glyphicon glyphicon-star-empty"></i> Matchs</a>
+                        <a href="{{ URL::action('GameController@show', $user->id) }}"><i class="glyphicon glyphicon-star-empty"></i> Matchs</a>
                       </li>
                       <li>
                         <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Ajouter match</a>

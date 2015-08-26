@@ -70,14 +70,22 @@ class GameController extends Controller
         {
             $query->orderBy('date', 'ASC');
         }))->find($id);
+        $games = count($user->game);
+        $victory = 1;
+        $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
+        $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
         
-        return view('game.show', compact('user'));
+        return view('game.showGame', compact('user', 'games', 'victory', 'gamesPast', 'nextGame'));
     }
 
     public function analyse($id, $userId){
         $user = User::with('club')->find($userId);
         $game = Game::find($id);
-        return view('game.analyse', compact('user', 'game'));
+        $games = count($user->game);
+        $victory = 1;
+        $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
+        $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
+        return view('game.addAnalyse', compact('user', 'game', 'games', 'victory', 'gamesPast', 'nextGame'));
     }
 
     public function addAnalyse(){
