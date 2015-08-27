@@ -38,14 +38,16 @@
                 </div>
             </div>
             @if($games != null)
-                <div class="panel panel-default">
-                    <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Prochain match</h4></div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">{{$nextGame->name_adverse}}</a>
+                @if($nextGame != null)
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Prochain match</h4></div>
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="http://bootply.com/tagged/datatable" class="list-group-item">{{$nextGame->name_adverse}}</a>
+                          </div>
                       </div>
-                  </div>
-                </div>
+                    </div>
+                @endif
                 <div class="panel panel-default">
                     <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Derniers matchs</h4></div>
                     <div class="panel-body">

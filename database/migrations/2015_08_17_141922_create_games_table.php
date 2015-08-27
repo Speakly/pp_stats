@@ -19,7 +19,10 @@ class CreateGamesTable extends Migration
             $table->integer('game_team_id_2');
             $table->text('name_adverse');
             $table->integer('domicile');
+            $table->integer('score_user');
+            $table->integer('score_adverse');
             $table->date('date');
+            $table->integer('done');
             $table->timestamps();
         });
     }

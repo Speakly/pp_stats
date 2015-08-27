@@ -22,6 +22,11 @@
                         'action' => ['GameController@addAnalyse']
                         ]) 
                     !!}
+                    
+                    {!! Form::hidden('user_id', $user->id) !!}
+                    {!! Form::hidden('name', $user->name) !!}
+                    {!! Form::hidden('surname', $user->surname) !!}
+                    {!! Form::hidden('game_id', $game->id) !!}
                     <div id="analyse-score" class="row text-center form-group">
                         @if($game->domicile == 1)
                             <div class="col-md-4 game-clubmine">
@@ -53,6 +58,16 @@
                             </div>
                         @endif
                     </div>
+                    <div class="row text-center" style="margin-bottom:30px">
+                        <div class="col-md-2 col-md-offset-4">
+                            <label class="control-label">Cinq majeur ?</label>
+                        </div>
+                        <div class="col-md-2">
+                            Oui {!! Form::radio('cinq_majeur', 1, 'oui') !!}
+                            Non {!! Form::radio('cinq_majeur', 0, 'non') !!}
+                        </div>
+
+                    </div>
                     	<div id="analyse-content" class="row text-center">
                             <div class="col-md-3">
                                 <div id="analyse-stats">
@@ -71,13 +86,13 @@
                                     <div class="form-group row">
                                         <label class="col-sm-6 control-label">3 Points</label>
                                         <div class="col-sm-5 col-lg-4">
-                                            {!! Form::text('threepoints', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('trois_points', null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-6 control-label">Lancers francs</label>
                                         <div class="col-sm-5 col-lg-4">
-                                            {!! Form::text('lancerfrancs', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('lancer_franc', null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                     
@@ -90,7 +105,7 @@
                             <div class="col-md-3">
                                 <div class="form-group row">
                                     <div class="col-sm-5 col-lg-4">
-                                            {!! Form::text('passes', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('passe', null, ['class' => 'form-control']) !!}
                                         </div>
                                         <label class="col-sm-6 control-label">Passes décisives</label>
                                     </div>

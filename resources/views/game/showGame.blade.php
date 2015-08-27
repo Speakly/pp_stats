@@ -25,7 +25,7 @@
 								<div class="col-md-1">vs</div>
 		                    	<div class="col-md-3">{{ $game->name_adverse }}</div>
 		                    	<div class="col-md-3">
-		                    		@if($game->date < date('Y-m-d'))
+		                    		@if($game->date < date('Y-m-d') && $game->done != 1)
 		                    			<a href="{{ URL::action('GameController@analyse', array($game->id, $user->id)) }}"><button class="homepage-btn">Analyser mon match</button></a>
 		                    		@else
 		                    			<a href="#"><button style="background-color:#CCC;cursor:initial" class="homepage-btn">Analyser mon match</button></a>
@@ -40,7 +40,7 @@
 		                    	<div class="col-md-1">vs</div>
 		                    	<div class="col-md-3 game-clubmine">{{ $user->club->nom }}</div>
 		                    	<div class="col-md-3">
-		                    		@if($game->date < date('Y-m-d'))
+		                    		@if($game->date < date('Y-m-d') && $game->done != 1)
 		                    			<a href="{{ URL::action('GameController@analyse', array($game->id, $user->id)) }}"><button class="homepage-btn">Analyser mon match</button></a>
 		                    		@else
 		                    			<a href="#"><button style="background-color:#CCC;cursor:initial" class="homepage-btn">Analyser mon match</button></a>

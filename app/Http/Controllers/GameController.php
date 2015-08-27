@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Game;
 use App\User;
+use App\Statistiques;
 use Input;
 use Redirect;
 use Auth;
@@ -90,6 +91,8 @@ class GameController extends Controller
 
     public function addAnalyse(){
         $data = Input::all();
+
+        // Victoire ou pas
         if($data['score_user'] > $data['score_adverse'])
             $victoire = 1;
         elseif($data['score_user'] < $data['score_adverse']) 
@@ -97,9 +100,30 @@ class GameController extends Controller
         else
         $victoire = 3;
 
-        $data = array_add($data, 'victoire', $victoire);
+        // Titulaire ou pas
+        if($data['cinq_majeur'] == 1)
+            $titulaire = 1;
+        else $titulaire = 0;
 
-        return $data;
+        // Ajout des data précédentes pour BDD
+        $data = array_add($data, 'victoire', $victoire);
+        $data = array_add($data, 'titulaire', $titulaire);
+
+        $analyse = Statistiques::create($data);
+        
+        // Si stats remplis game done vaut 1
+        if($analyse){
+            $game = Game::find($data['game_id']);
+            $game->done = 1;
+            $game->save();
+        }
+        
+
+        // Pour redirection timeline with param name / surname
+        $name = $data['name'];
+        $surname = $data['surname'];
+
+        return Redirect::action('PageController@timeline', compact('name', 'surname'));
     }
 
     /**
