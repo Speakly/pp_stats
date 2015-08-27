@@ -33,11 +33,12 @@ class PageController extends Controller
     public function timeline($name, $surname) {
 
         if(Auth::id()){
+            $user = User::with('game')->find(Auth::id());
             if(isset($user->game)){
-                $user = User::with('game')->find(Auth::id());
+                
                 $games = count($user->game);
                 $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
-                $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
+                $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
             }
                 
             else {
