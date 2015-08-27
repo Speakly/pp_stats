@@ -27,6 +27,7 @@
                     {!! Form::hidden('name', $user->name) !!}
                     {!! Form::hidden('surname', $user->surname) !!}
                     {!! Form::hidden('game_id', $game->id) !!}
+                    {!! Form::hidden('poste', $user->poste) !!}
                     <div id="analyse-score" class="row text-center form-group">
                         @if($game->domicile == 1)
                             <div class="col-md-4 game-clubmine">
@@ -58,8 +59,8 @@
                             </div>
                         @endif
                     </div>
-                    <div class="row text-center" style="margin-bottom:30px">
-                        <div class="col-md-2 col-md-offset-4">
+                    <div class="row" style="margin-bottom:30px">
+                        <div class="col-md-2">
                             <label class="control-label">Cinq majeur ?</label>
                         </div>
                         <div class="col-md-2">

@@ -26,6 +26,7 @@ class CreateStatistiquesTable extends Migration
             $table->integer('victoire');
             $table->integer('user_id');
             $table->integer('game_id');
+            $table->integer('evaluation');
             $table->timestamps();
         });
     }
