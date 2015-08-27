@@ -73,7 +73,7 @@ class GameController extends Controller
         $games = count($user->game);
         $victory = 1;
         $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
-        $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
+        $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
         
         return view('game.showGame', compact('user', 'games', 'victory', 'gamesPast', 'nextGame'));
     }
@@ -84,12 +84,21 @@ class GameController extends Controller
         $games = count($user->game);
         $victory = 1;
         $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
-        $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
+        $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
         return view('game.addAnalyse', compact('user', 'game', 'games', 'victory', 'gamesPast', 'nextGame'));
     }
 
     public function addAnalyse(){
         $data = Input::all();
+        if($data['score_user'] > $data['score_adverse'])
+            $victoire = 1;
+        elseif($data['score_user'] < $data['score_adverse']) 
+            $victoire = 0;
+        else
+        $victoire = 3;
+
+        $data = array_add($data, 'victoire', $victoire);
+
         return $data;
     }
 

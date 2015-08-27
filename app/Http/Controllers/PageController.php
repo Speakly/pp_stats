@@ -33,12 +33,20 @@ class PageController extends Controller
     public function timeline($name, $surname) {
 
         if(Auth::id()){
-            $user = User::with('game')->find(Auth::id());
-            $games = count($user->game);
+            if(isset($user->game)){
+                $user = User::with('game')->find(Auth::id());
+                $games = count($user->game);
+                $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
+                $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
+            }
+                
+            else {
+                $user = User::find(Auth::id());
+                $games = null;
+                $gamesPast = null;
+                $nextGame = null;
+            }
             $victory = 1;
-            $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
-            $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->firstOrfail();
-
             return view ('timeline.home', compact('user', 'games', 'victory', 'gamesPast', 'nextGame'));
         }
         else return Redirect::action('PageController@index');

@@ -16,9 +16,14 @@ class CreateStatistiquesTable extends Migration
             $table->increments('id');
             $table->string('minutes');
             $table->string('passe');
-            $table->string('paniers');
+            $table->string('points');
+            $table->string('trois_points');
             $table->string('titulaire');
-            $table->boolean('victoire');
+            $table->string('lancer_franc');
+            $table->string('rebonds');
+            $table->string('interceptions');
+            $table->string('fautes');
+            $table->integer('victoire');
             $table->integer('user_id');
             $table->timestamps();
         });
