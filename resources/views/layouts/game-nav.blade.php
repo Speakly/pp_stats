@@ -1,5 +1,5 @@
              <!-- main col left -->
-        <div class="col-sm-4 col-xs-12 col-md-3 col-lg-2">
+        <div class="col-sm-4 col-xs-12 col-md-3">
             <div class="qw rd aof alt">
                 <div class="qy"></div>
                 <div class="qx dj text-center">

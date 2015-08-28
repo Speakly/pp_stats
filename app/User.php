@@ -60,6 +60,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Game', 'club_id', 'club_id');
     }
 
+    public function statistiques()
+    {
+        return $this->hasMany('App\Statistiques', 'user_id', 'id');
+    }
     
 
 }

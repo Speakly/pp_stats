@@ -10,6 +10,7 @@ use Auth;
 use Redirect;
 use App\User;
 use App\Game;
+use App\Statistiques;
 use Input;
 use Validator;
 use Response;
@@ -33,7 +34,7 @@ class PageController extends Controller
     public function timeline($name, $surname) {
 
         if(Auth::id()){
-            $user = User::with('game')->find(Auth::id());
+            $user = User::with('game', 'statistiques')->find(Auth::id());
             if(isset($user->game)){
                 
                 $games = count($user->game);

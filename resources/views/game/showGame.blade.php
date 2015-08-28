@@ -13,7 +13,7 @@
         </div>
 
         <!-- main col right -->
-        <div id="main-center" class="col-sm-8 col-xs-12 col-md-9 col-lg-7">
+        <div id="main-center" class="col-sm-8 col-xs-12 col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading"> <h4>Tes matchs</h4></div>
                 <div class="panel-body">

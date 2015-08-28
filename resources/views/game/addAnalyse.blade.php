@@ -13,7 +13,7 @@
         </div>
 
         <!-- main col right -->
-        <div id="main-center" class="col-sm-5 col-xs-5 col-md-9 col-lg-7">
+        <div id="main-center" class="col-sm-5 col-xs-5 col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading"> <h4>Analyse ton match</h4></div>
                 <div class="panel-body">

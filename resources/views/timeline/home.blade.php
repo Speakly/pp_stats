@@ -8,7 +8,7 @@
 	<!-- content -->                     
     <div class="row">
         <!-- main col left -->
-        <div class="col-sm-4 col-xs-4 col-md-3 col-lg-2">
+        <div class="col-sm-5 col-xs-4 col-md-3">
             <div class="qw rd aof alt">
                 <div class="qy"></div>
                 <div class="qx dj text-center">
@@ -18,6 +18,7 @@
                     <h5 class="qz">
                         <a href="/application/profile/" class="akt">Amaury Leproux</a>
                     </h5>
+
                     <p class="alt">{{ $user->poste }}, {{ $user->taille }}cm, joue au club <span style="font-weight:bold;">{{ $user->club->nom }}</span></p>
                     @if($games != null)
                         <ul class="aoh">
@@ -62,7 +63,7 @@
         </div>
 
         <!-- main col right -->
-        <div id="main-center" class="col-sm-5 col-xs-5 col-md-6 col-lg-7">
+        <div id="main-center" class="col-sm-5 col-xs-5 col-md-6">
 
             <div class="well"> 
                 <form class="form-horizontal" role="form">
@@ -110,7 +111,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques</h4></div>
                 <div class="panel-body">
-                    <p>120 minutes<br>13 points<br>8 rebonds<br> 3 passes</p>
+                    @foreach($user->statistiques as $stats)
+                        <p>Minutes : {{$stats->minutes}} <br>Points : {{$stats->points}}<br>3 points : {{$stats->trois_points}}<br> Cinq Majeurs : {{$stats->titulaire}}</p>
+                    @endforeach
                 </div>
             </div>
             <div class="panel panel-default">
