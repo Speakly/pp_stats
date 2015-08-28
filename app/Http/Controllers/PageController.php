@@ -34,12 +34,33 @@ class PageController extends Controller
     public function timeline($name, $surname) {
 
         if(Auth::id()){
-            $user = User::with('game', 'statistiques')->find(Auth::id());
+            $user = User::with('game')->find(Auth::id());
             if(isset($user->game)){
                 
                 $games = count($user->game);
                 $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
                 $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
+                $statistiques = Statistiques::where('user_id', $user['id'])->get();
+                $statsLastGame = Statistiques::where('user_id', $user['id'])->orderBy('created_at', 'DESC')->take(1)->first();
+
+                $x = 1;
+                $stats = array();
+                $count = count($statistiques) -1;
+                for($i=0;$i<$count;$i++){
+                    $stats['minutes'] = $statistiques[$i]['minutes'] + $statistiques[$x]['minutes'];
+                    $stats['passes'] = $statistiques[$i]['passe'] + $statistiques[$x]['passe'];
+                    $stats['points'] = $statistiques[$i]['points'] + $statistiques[$x]['points'];
+                    $stats['trois_points'] = $statistiques[$i]['trois_points'] + $statistiques[$x]['trois_points'];
+                    $stats['titulaire'] = $statistiques[$i]['titulaire'] + $statistiques[$x]['titulaire'];
+                    $stats['lancer_franc'] = $statistiques[$i]['lancer_franc'] + $statistiques[$x]['lancer_franc'];
+                    $stats['rebonds'] = $statistiques[$i]['rebonds'] + $statistiques[$x]['rebonds'];
+                    $stats['interceptions'] = $statistiques[$i]['insterceptions'] + $statistiques[$x]['insterceptions'];
+                    $stats['fautes'] = $statistiques[$i]['fautes'] + $statistiques[$x]['fautes'];
+                    $stats['victoire'] = $statistiques[$i]['victoire'] + $statistiques[$x]['victoire'];
+                    $x ++;
+                }
+                
+
             }
                 
             else {
@@ -49,7 +70,7 @@ class PageController extends Controller
                 $nextGame = null;
             }
             $victory = 1;
-            return view ('timeline.home', compact('user', 'games', 'victory', 'gamesPast', 'nextGame'));
+            return view ('timeline.home', compact('user', 'games', 'stats', 'statsLastGame', 'victory', 'gamesPast', 'nextGame'));
         }
         else return Redirect::action('PageController@index');
             
