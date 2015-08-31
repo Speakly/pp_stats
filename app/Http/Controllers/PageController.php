@@ -46,23 +46,36 @@ class PageController extends Controller
                 $x = 1;
                 $stats = array();
                 $count = count($statistiques) -1;
-                for($i=0;$i<$count;$i++){
-                    $stats['minutes'] = $statistiques[$i]['minutes'] + $statistiques[$x]['minutes'];
-                    $stats['passes'] = $statistiques[$i]['passe'] + $statistiques[$x]['passe'];
-                    $stats['points'] = $statistiques[$i]['points'] + $statistiques[$x]['points'];
-                    $stats['trois_points'] = $statistiques[$i]['trois_points'] + $statistiques[$x]['trois_points'];
-                    $stats['titulaire'] = $statistiques[$i]['titulaire'] + $statistiques[$x]['titulaire'];
-                    $stats['lancer_franc'] = $statistiques[$i]['lancer_franc'] + $statistiques[$x]['lancer_franc'];
-                    $stats['rebonds'] = $statistiques[$i]['rebonds'] + $statistiques[$x]['rebonds'];
-                    $stats['interceptions'] = $statistiques[$i]['insterceptions'] + $statistiques[$x]['insterceptions'];
-                    $stats['fautes'] = $statistiques[$i]['fautes'] + $statistiques[$x]['fautes'];
-                    $stats['victoire'] = $statistiques[$i]['victoire'] + $statistiques[$x]['victoire'];
-                    $x ++;
+                
+                if($count == 0){
+                    $stats['minutes'] = $statistiques[0]['minutes'];
+                    $stats['passes'] = $statistiques[0]['passe'];
+                    $stats['points'] = $statistiques[0]['points'];
+                    $stats['trois_points'] = $statistiques[0]['trois_points'];
+                    $stats['titulaire'] = $statistiques[0]['titulaire'];
+                    $stats['lancer_franc'] = $statistiques[0]['lancer_franc'];
+                    $stats['rebonds'] = $statistiques[0]['rebonds'];
+                    $stats['interceptions'] = $statistiques[0]['insterceptions'];
+                    $stats['fautes'] = $statistiques[0]['fautes'];
+                    $stats['victoire'] = $statistiques[0]['victoire'];
                 }
-                
-
-            }
-                
+                    
+                else {
+                    for($i=0;$i<$count;$i++){
+                        $stats['minutes'] = $statistiques[$i]['minutes'] + $statistiques[$x]['minutes'];
+                        $stats['passes'] = $statistiques[$i]['passe'] + $statistiques[$x]['passe'];
+                        $stats['points'] = $statistiques[$i]['points'] + $statistiques[$x]['points'];
+                        $stats['trois_points'] = $statistiques[$i]['trois_points'] + $statistiques[$x]['trois_points'];
+                        $stats['titulaire'] = $statistiques[$i]['titulaire'] + $statistiques[$x]['titulaire'];
+                        $stats['lancer_franc'] = $statistiques[$i]['lancer_franc'] + $statistiques[$x]['lancer_franc'];
+                        $stats['rebonds'] = $statistiques[$i]['rebonds'] + $statistiques[$x]['rebonds'];
+                        $stats['interceptions'] = $statistiques[$i]['insterceptions'] + $statistiques[$x]['insterceptions'];
+                        $stats['fautes'] = $statistiques[$i]['fautes'] + $statistiques[$x]['fautes'];
+                        $stats['victoire'] = $statistiques[$i]['victoire'] + $statistiques[$x]['victoire'];
+                        $x ++;
+                    }
+                }
+            } 
             else {
                 $user = User::find(Auth::id());
                 $games = null;

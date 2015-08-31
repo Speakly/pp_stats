@@ -16,7 +16,7 @@
                         <img src="{{ URL::asset('images/logos/51.jpg') }}" class="aog">
                     </a>
                     <h5 class="qz">
-                        <a href="/application/profile/" class="akt">Amaury Leproux</a>
+                        <a href="/application/profile/" class="akt">{{$user->surname}} {{$user->name}} </a>
                     </h5>
 
                     <p class="alt">{{ $user->poste }}, {{ $user->taille }}cm, joue au club <span style="font-weight:bold;">{{ $user->club->nom }}</span></p>
@@ -111,31 +111,35 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques</h4></div>
                 <div class="panel-body">
-                    <div class="list-group">
-                        <a href="http://bootply.com/tagged/modal" class="list-group-item">Minutes : {{$stats['minutes']}}</a>
-                        <a href="http://bootply.com/tagged/datetime" class="list-group-item">Point(s) : {{$stats['points']}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Passe(s) : {{$stats['passes']}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">3 Point(s) : {{$stats['trois_points']}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Cinq majeur : {{$stats['titulaire']}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Rebond(s) : {{$stats['rebonds']}}</a>
-                         <a href="http://bootply.com/tagged/datatable" class="list-group-item">Interception(s) : {{$stats['interceptions']}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Victoire(s) : {{$stats['victoire']}}</a>
-                  </div>
+                    @if($stats)
+                        <div class="list-group">
+                            <a href="http://bootply.com/tagged/modal" class="list-group-item">Minutes : {{$stats['minutes']}}</a>
+                            <a href="http://bootply.com/tagged/datetime" class="list-group-item">Point(s) : {{$stats['points']}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Passe(s) : {{$stats['passes']}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">3 Point(s) : {{$stats['trois_points']}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Cinq majeur : {{$stats['titulaire']}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Rebond(s) : {{$stats['rebonds']}}</a>
+                             <a href="http://bootply.com/tagged/datatable" class="list-group-item">Interception(s) : {{$stats['interceptions']}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Victoire(s) : {{$stats['victoire']}}</a>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques dernier match</h4></div>
                 <div class="panel-body">
-                    <div class="list-group">
-                        <a href="http://bootply.com/tagged/modal" class="list-group-item">Minutes : {{$statsLastGame->minutes}}</a>
-                        <a href="http://bootply.com/tagged/datetime" class="list-group-item">Point(s) : {{$statsLastGame->points}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Passe(s) : {{$statsLastGame->passe}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">3 Point(s) : {{$statsLastGame->trois_points}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Cinq majeur : {{$statsLastGame->titulaire}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Rebond(s) : {{$statsLastGame->rebonds}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Interception(s) : {{$statsLastGame->interceptions}}</a>
-                        <a href="http://bootply.com/tagged/datatable" class="list-group-item">Victoire : {{$statsLastGame->victoire}}</a>
-                  </div>
+                    @if($statsLastGame)
+                        <div class="list-group">
+                            <a href="http://bootply.com/tagged/modal" class="list-group-item">Minutes : {{$statsLastGame->minutes}}</a>
+                            <a href="http://bootply.com/tagged/datetime" class="list-group-item">Point(s) : {{$statsLastGame->points}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Passe(s) : {{$statsLastGame->passe}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">3 Point(s) : {{$statsLastGame->trois_points}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Cinq majeur : {{$statsLastGame->titulaire}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Rebond(s) : {{$statsLastGame->rebonds}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Interception(s) : {{$statsLastGame->interceptions}}</a>
+                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">Victoire : {{$statsLastGame->victoire}}</a>
+                        </div>
+                    @endif
               </div>
             </div>
         </div>
