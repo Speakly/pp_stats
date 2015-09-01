@@ -49,7 +49,7 @@
                         <a href="{{ URL::action('PageController@timeline', [$user->surname, $user->name]) }}"><i class="glyphicon glyphicon-home"></i> Accueil</a>
                       </li>
                       <li>
-                        <a href="#"><i class="glyphicon glyphicon-signal"></i> Statistiques</a>
+                        <a href="{{ URL::action('PageController@statistiques', $user->id)}}"><i class="glyphicon glyphicon-signal"></i> Statistiques</a>
                       </li>
                       <li>
                         <a href="{{ URL::action('GameController@show', $user->id) }}"><i class="glyphicon glyphicon-star-empty"></i> Matchs</a>
@@ -63,7 +63,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
                         <ul class="dropdown-menu">
                           <li><a href="">Profil</a></li>
-                          <li><a href="">Se déconnecter</a></li>
+                          <li><a href="{{ URL::action('PageController@logout') }}">Se déconnecter</a></li>
                         </ul>
                       </li>
                     </ul>

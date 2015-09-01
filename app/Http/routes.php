@@ -36,3 +36,4 @@ Route::any('game/validation', 'GameController@create');
 Route::any('game/{id}', 'GameController@show');
 Route::any('game/analyse/{id}/{userId}', 'GameController@analyse');
 Route::post('game/analyse/add', 'GameController@addAnalyse');
+Route::get('statistiques/{id}', 'PageController@statistiques');

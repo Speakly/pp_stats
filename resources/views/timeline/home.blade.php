@@ -13,7 +13,13 @@
                 <div class="qy"></div>
                 <div class="qx dj text-center">
                     <a href="/application/profile/">
-                        <img src="{{ URL::asset('images/logos/51.jpg') }}" class="aog">
+                        
+                        @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
+                            <img src="{{ URL::asset('images/logos/' . $user->id.'.png') }}" class="aog">
+                            
+                        @elseif(File::exists(public_path().'.images/logos/'.$user->id.'.jpg'))
+                            <img src="{{ URL::asset('images/logos/' . $user->id.'.jpg') }}" class="aog">
+                        @endif
                     </a>
                     <h5 class="qz">
                         <a href="/application/profile/" class="akt">{{$user->surname}} {{$user->name}} </a>
@@ -109,7 +115,7 @@
         </div>
         <div class="col-sm-3 col-md-3">
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques</h4></div>
+                <div class="panel-heading"><a href="{{ URL::action('PageController@statistiques', $user->id)}}" class="pull-right">Toutes les stats</a> <h4>Statistiques</h4></div>
                 <div class="panel-body">
                     @if($stats)
                         <div class="list-group">
@@ -126,7 +132,7 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Statistiques dernier match</h4></div>
+                <div class="panel-heading"><a href="{{ URL::action('PageController@statistiques', $user->id)}}" class="pull-right">Toutes les stats</a> <h4>Statistiques dernier match</h4></div>
                 <div class="panel-body">
                     @if($statsLastGame)
                         <div class="list-group">

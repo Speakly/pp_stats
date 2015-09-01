@@ -338,6 +338,8 @@ small.text-muted {
     margin-bottom: 5px;
     margin-top: -70px;
     max-width: 100px;
+    height: 100px;
+    max-height: 100px;
 }
 .aoh {
     list-style: outside none none;
@@ -405,4 +407,24 @@ input.form-control {
 }
 #analyse-content {
   padding: 10px;
+}
+.DataTables_Table_0_wrapper {
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 50px;
+}
+.stats-colonne {
+  color:#c0392b;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid #e0e7e8;
+    line-height: 1.42857;
+    /*padding: 10px;*/
+    vertical-align: top;
+}
+.stats-title {
+  font-weight: bold;
+  margin-top:5px;
+  margin-bottom: 20px;
 }
