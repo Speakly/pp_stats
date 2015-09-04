@@ -10,6 +10,7 @@ use Auth;
 use Redirect;
 use App\User;
 use App\Game;
+use App\Post;
 use App\Statistiques;
 use Input;
 use Validator;
@@ -36,30 +37,30 @@ class PageController extends Controller
         if(Auth::id()){
             $user = User::with('game')->find(Auth::id());
             if(isset($user->game)){
-                
+
                 $games = count($user->game);
                 $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
                 $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
                 $statistiques = Statistiques::where('user_id', $user['id'])->get();
                 $statsLastGame = Statistiques::where('user_id', $user['id'])->orderBy('created_at', 'DESC')->take(1)->first();
+                $post = Post::where('user_id', $user['id'])->orderBy('created_at', 'DESC')->get();
 
-                
                 $stats = array(
-                    'minutes' => '', 
+                    'minutes' => '',
                     'passes' => '',
-                    'points' => '', 
+                    'points' => '',
                     'trois_points' => '',
-                    'titulaire' => '', 
+                    'titulaire' => '',
                     'lancer_franc' => '',
-                    'rebonds' => '', 
+                    'rebonds' => '',
                     'interceptions' => '',
-                    'fautes' => '', 
+                    'fautes' => '',
                     'victoire' => '',
                     'evaluation' => ''
                     );
                 $count = count($statistiques);
 
-                if($count == 0){
+                if($count == 0 && empty($statistiques)){
                     $stats['minutes'] = $statistiques[0]['minutes'];
                     $stats['passes'] = $statistiques[0]['passe'];
                     $stats['points'] = $statistiques[0]['points'];
@@ -71,9 +72,9 @@ class PageController extends Controller
                     $stats['fautes'] = $statistiques[0]['fautes'];
                     $stats['victoire'] = $statistiques[0]['victoire'];
                 }
-                    
+
                 else {
-                    for($i=0;$i<=$count;$i++){
+                    for($i=0;$i<$count;$i++){
                         $stats['minutes'] += $statistiques[$i]['minutes'];
                         $stats['passes'] += $statistiques[$i]['passe'];
                         $stats['points'] += $statistiques[$i]['points'];
@@ -87,19 +88,18 @@ class PageController extends Controller
                     }
                 }
 
-            } 
+            }
             else {
                 $user = User::find(Auth::id());
                 $games = null;
                 $gamesPast = null;
                 $nextGame = null;
             }
-            dd($stats);
             $victory = $stats['victoire'];
-            return view ('timeline.home', compact('user', 'games', 'stats', 'statsLastGame', 'victory', 'gamesPast', 'nextGame'));
+            return view ('timeline.home', compact('user', 'games', 'post', 'stats', 'statsLastGame', 'victory', 'gamesPast', 'nextGame'));
         }
         else return Redirect::action('PageController@index');
-            
+
     }
 
     public function addGame($id, $page = 'game'){
@@ -128,30 +128,30 @@ class PageController extends Controller
                 return Response::make($validation->errors->first(), 400);
             }
             $file = Input::file('logo');
-            $extension =$file->getClientOriginalExtension(); 
+            $extension =$file->getClientOriginalExtension();
             $directory = public_path().'/images/logos/';
             $filename = $user->id.".{$extension}";
-    
+
         }
 
         //photo
         elseif(isset($input['photo1']) || isset($input['photo2']) || isset($input['photo3']) || isset($input['photo4'])){
             $file = Input::file('photo'.$input['id_photo']);
-            $extension =$file->getClientOriginalExtension(); 
+            $extension =$file->getClientOriginalExtension();
             $directory = public_path().'/photos/';
-            $filename = $user->id."_".$input['id_photo'].".{$extension}"; 
-            
+            $filename = $user->id."_".$input['id_photo'].".{$extension}";
+
         }
-        
-        
-            
+
+
+
             $upload_success = $file->move($directory, $filename);
             if( $upload_success ) {
                 return Response::json('success', 200);
             } else {
                 return Response::json('error', 400);
             }
-        
+
     }
 
     public function statistiques($id)
@@ -160,7 +160,7 @@ class PageController extends Controller
         if(Auth::id()){
             $user = User::with('game')->find(Auth::id());
             if(isset($user->game)){
-                
+
                 $games = count($user->game);
                 $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
                 $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
@@ -168,57 +168,58 @@ class PageController extends Controller
                 $statsLastGame = Statistiques::where('user_id', $user['id'])->orderBy('created_at', 'DESC')->take(1)->first();
 
                 $stats = array(
-                    'minutes' => '', 
+                    'minutes' => '',
                     'passes' => '',
-                    'points' => '', 
+                    'points' => '',
                     'trois_points' => '',
-                    'titulaire' => '', 
+                    'titulaire' => '',
                     'lancer_franc' => '',
-                    'rebonds' => '', 
+                    'rebonds' => '',
                     'interceptions' => '',
-                    'fautes' => '', 
+                    'fautes' => '',
                     'victoire' => '',
                     'evaluation' => ''
                     );
-                
-                
-              
+
+
+
                 $count = count($statistiques);
-                
-                if($count == 0){
-                    $stats['minutes'] = $statistiques[0]['minutes'];
-                    $stats['passes'] = $statistiques[0]['passe'];
-                    $stats['points'] = $statistiques[0]['points'];
-                    $stats['trois_points'] = $statistiques[0]['trois_points'];
-                    $stats['titulaire'] = $statistiques[0]['titulaire'];
-                    $stats['lancer_franc'] = $statistiques[0]['lancer_franc'];
-                    $stats['rebonds'] = $statistiques[0]['rebonds'];
-                    $stats['interceptions'] = $statistiques[0]['insterceptions'];
-                    $stats['fautes'] = $statistiques[0]['fautes'];
-                    $stats['victoire'] = $statistiques[0]['victoire'];
-                    $stats['evaluation'] = $statistiques[0]['evaluation'];
-                }
-                
-                
-                else {
-                    for($i=0;$i<$count;$i++){
-                        $stats['minutes'] += $statistiques[$i]['minutes'];
-                        $stats['passes'] += $statistiques[$i]['passe'];
-                        $stats['points'] += $statistiques[$i]['points'];
-                        $stats['trois_points'] += $statistiques[$i]['trois_points'];
-                        $stats['titulaire'] += $statistiques[$i]['titulaire'];
-                        $stats['lancer_franc'] += $statistiques[$i]['lancer_franc'];
-                        $stats['rebonds'] += $statistiques[$i]['rebonds'];
-                        $stats['interceptions'] += $statistiques[$i]['insterceptions'];
-                        $stats['fautes'] += $statistiques[$i]['fautes'];
-                        $stats['victoire'] += $statistiques[$i]['victoire'];
-                        $stats['evaluation'] += $statistiques[$i]['evaluation'];
+                if(empty($statistiques)) {
+                    if($count == 0 ){
+                        $stats['minutes'] = $statistiques[0]['minutes'];
+                        $stats['passes'] = $statistiques[0]['passe'];
+                        $stats['points'] = $statistiques[0]['points'];
+                        $stats['trois_points'] = $statistiques[0]['trois_points'];
+                        $stats['titulaire'] = $statistiques[0]['titulaire'];
+                        $stats['lancer_franc'] = $statistiques[0]['lancer_franc'];
+                        $stats['rebonds'] = $statistiques[0]['rebonds'];
+                        $stats['interceptions'] = $statistiques[0]['insterceptions'];
+                        $stats['fautes'] = $statistiques[0]['fautes'];
+                        $stats['victoire'] = $statistiques[0]['victoire'];
+                        $stats['evaluation'] = $statistiques[0]['evaluation'];
+                    }
+
+
+                    else {
+                        for($i=0;$i<$count;$i++){
+                            $stats['minutes'] += $statistiques[$i]['minutes'];
+                            $stats['passes'] += $statistiques[$i]['passe'];
+                            $stats['points'] += $statistiques[$i]['points'];
+                            $stats['trois_points'] += $statistiques[$i]['trois_points'];
+                            $stats['titulaire'] += $statistiques[$i]['titulaire'];
+                            $stats['lancer_franc'] += $statistiques[$i]['lancer_franc'];
+                            $stats['rebonds'] += $statistiques[$i]['rebonds'];
+                            $stats['interceptions'] += $statistiques[$i]['insterceptions'];
+                            $stats['fautes'] += $statistiques[$i]['fautes'];
+                            $stats['victoire'] += $statistiques[$i]['victoire'];
+                            $stats['evaluation'] += $statistiques[$i]['evaluation'];
+
+                        }
+                        $stats['evaluation'] = round($stats['evaluation'] / $count, 1);
 
                     }
-                    $stats['evaluation'] = round($stats['evaluation'] / $count, 1);
-                   
                 }
-            } 
+            }
             else {
                 $user = User::find(Auth::id());
                 $games = null;
@@ -231,6 +232,14 @@ class PageController extends Controller
         }
         else return Redirect::action('PageController@index');
 
+    }
+
+    public function post()
+    {
+      $data = Input::all();
+      $post = Post::create($data);
+
+      return Redirect::action('PageController@timeline');
     }
 
     /**

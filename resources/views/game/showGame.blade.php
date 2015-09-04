@@ -4,14 +4,9 @@
 @stop
 
 @section('content')
-	<!-- content -->                     
+	<!-- content -->
     <div class="row">
-       
-
-            @include('layouts.game-nav')
-            
-        </div>
-
+        @include('layouts.game-nav')
         <!-- main col right -->
         <div id="main-center" class="col-sm-8 col-xs-12 col-md-9">
             <div class="panel panel-default">
@@ -22,7 +17,7 @@
 		                    <div class="row">
 		                    	<div class="col-md-2">{{ $game->date }}</div>
 		                    	<div class="col-md-3 game-clubmine">{{ $user->club->nom }}</div>
-								<div class="col-md-1">vs</div>
+								          <div class="col-md-1">vs</div>
 		                    	<div class="col-md-3">{{ $game->name_adverse }}</div>
 		                    	<div class="col-md-3">
 		                    		@if($game->date < date('Y-m-d') && $game->done != 1)
@@ -53,11 +48,11 @@
                 </div>
             </div>
         </div>
-        
+
     </div><!--/row-->
 
 @stop
 
 @section('scripts')
-     
+
 @stop

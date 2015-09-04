@@ -22,6 +22,7 @@ class CreateGamesTable extends Migration
             $table->integer('score_user');
             $table->integer('score_adverse');
             $table->date('date');
+            $table->integer('victoire');
             $table->integer('done');
             $table->timestamps();
         });

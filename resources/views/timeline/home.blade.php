@@ -5,91 +5,84 @@
 
 @section('content')
 
-	<!-- content -->                     
+	<!-- content -->
     <div class="row">
         <!-- main col left -->
-        <div class="col-sm-5 col-xs-4 col-md-3">
-            <div class="qw rd aof alt">
-                <div class="qy"></div>
-                <div class="qx dj text-center">
-                    <a href="/application/profile/">
-                        
-                        @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
-                            <img src="{{ URL::asset('images/logos/' . $user->id.'.png') }}" class="aog">
-                            
-                        @elseif(File::exists(public_path().'.images/logos/'.$user->id.'.jpg'))
-                            <img src="{{ URL::asset('images/logos/' . $user->id.'.jpg') }}" class="aog">
-                        @endif
-                    </a>
-                    <h5 class="qz">
-                        <a href="/application/profile/" class="akt">{{$user->surname}} {{$user->name}} </a>
-                    </h5>
-
-                    <p class="alt">{{ $user->poste }}, {{ $user->taille }}cm, joue au club <span style="font-weight:bold;">{{ $user->club->nom }}</span></p>
-                    @if($games != null)
-                        <ul class="aoh">
-                            <li class="aoi">
-                                <a data-toggle="modal" class="akt" href="#userModal">
-                                    Matchs
-                                    <h5 class="alh">{{ $games }}</h5>
-                                </a>
-                            </li>
-                            <li class="aoi">
-                                <a data-toggle="modal" class="akt" href="#userModal">
-                                    Victoires
-                                    <h5 class="alh">{{ $victory }}</h5>
-                                </a>
-                            </li>
-                        </ul>
-                    @endif
-                </div>
-            </div>
-            @if($games != null)
-                @if($nextGame != null)
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Prochain match</h4></div>
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="http://bootply.com/tagged/datatable" class="list-group-item">{{$nextGame->name_adverse}}</a>
-                          </div>
-                      </div>
-                    </div>
-                @endif
-                <div class="panel panel-default">
-                    <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Derniers matchs</h4></div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            @foreach($gamesPast as $gamePast)
-                                <a href="#" class="list-group-item">{{$gamePast->name_adverse}}</a>
-                            @endforeach
-                      </div>
-                  </div>
-                </div>
-            @endif
-        </div>
+        @include('layouts.nav-left')
 
         <!-- main col right -->
         <div id="main-center" class="col-sm-5 col-xs-5 col-md-6">
 
-            <div class="well"> 
-                <form class="form-horizontal" role="form">
-                    <h4>Publier quelque chose</h4>
-                    <div class="form-group" style="padding:14px;">
-                        <textarea class="form-control" placeholder="Exprimez-vous"></textarea>
-                    </div>
-                    <button class="btn btn-color-site pull-right" type="button">Poster</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
-                </form>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Bootply Editor &amp; Code Library</h4></div>
-                <div class="panel-body">
-                    <p><img src="//placehold.it/150x150" class="img-circle pull-right"> <a href="#">The Bootstrap Playground</a></p>
-                    <div class="clearfix"></div>
-                    <hr>
-                    Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
+            <div class="well">
+              {!! Form::open([
+                  'method' => 'POST',
+                  'action' => ['PageController@post'],
+                  'class' => 'from-horizontal'
+                  ])
+              !!}
+                {!! Form::token() !!}
+                {!! Form::hidden('user_id', $user->id) !!}
+                <h4>Publier quelque chose</h4>
+                <div class="form-group" style="padding:14px;">
+                  <textarea class="form-control" name="message" placeholder="Exprimez-vous"></textarea>
                 </div>
+                {!! Form::submit('Poster', ['class' => 'btn btn-color-site pull-right', 'type' => 'button']) !!}
+                <ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
+                {!! Form::close() !!}
             </div>
+            @if($gamesPast)
+                @foreach($gamesPast as $gamePast)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>
+                                <i class="glyphicon glyphicon-star-empty"></i>
+                                @if($gamePast->victoire = 1)
+                                    <span style="color:green">Victoire</span>
+                                @elseif($gamePast->victoire = 0)
+                                    <span style="color:red">Défaite</span>
+                                @else
+                                    <span>Nul</span>
+                                @endif
+
+                                contre
+                                {{$gamePast->name_adverse}}
+                            </h4></div>
+                        <div class="panel-body">
+                            <p class="text-center">
+                                <a href="#"></a>
+                                @if($gamePast->domicile == 1)
+                                    {{$user->club->nom}} <span>{{$gamePast->score_user}} - {{$gamePast->score_adverse}} </span>{{$gamePast->name_adverse}}
+                                @else
+                                    {{$gamePast->score_adverse}} - {{$gamePast->score_user}}
+                                @endif
+                            </p>
+                            <div class="clearfix"></div>
+                            <hr>
+                            Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
+            <!-- POST  -->
+            @foreach($post as $value)
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h4>
+                          <i class="glyphicon glyphicon-list-alt"></i>
+                          {{$user->surname}} {{$user->name}} vient de publier :
+                      </h4></div>
+                  <div class="panel-body">
+                      <p class="text-center">
+                          <a href="#"></a>
+                          {{$value->message}}
+                      </p>
+                      <div class="clearfix"></div>
+                      <hr>
+                      Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
+                  </div>
+              </div>
+            @endforeach
 
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Stackoverflow</h4></div>
@@ -117,7 +110,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="{{ URL::action('PageController@statistiques', $user->id)}}" class="pull-right">Toutes les stats</a> <h4>Statistiques</h4></div>
                 <div class="panel-body">
-                    @if($stats)
+                    @if(empty($stats))
                         <div class="list-group">
                             <a href="http://bootply.com/tagged/modal" class="list-group-item">Minutes : {{$stats['minutes']}}</a>
                             <a href="http://bootply.com/tagged/datetime" class="list-group-item">Point(s) : {{$stats['points']}}</a>
@@ -128,6 +121,8 @@
                              <a href="http://bootply.com/tagged/datatable" class="list-group-item">Interception(s) : {{$stats['interceptions']}}</a>
                             <a href="http://bootply.com/tagged/datatable" class="list-group-item">Victoire(s) : {{$stats['victoire']}}</a>
                         </div>
+                    @else
+                        <p> Pas encore de statistiques</p>
                     @endif
                 </div>
             </div>
@@ -145,23 +140,18 @@
                             <a href="http://bootply.com/tagged/datatable" class="list-group-item">Interception(s) : {{$statsLastGame->interceptions}}</a>
                             <a href="http://bootply.com/tagged/datatable" class="list-group-item">Victoire : {{$statsLastGame->victoire}}</a>
                         </div>
+                    @else
+                        <p> Pas encore de statistiques</p>
                     @endif
               </div>
             </div>
         </div>
     </div><!--/row-->
 
-    
 
-    
-
-
-                      
-
-    
 @stop
 
 @section('scripts')
-    
-    
+
+
 @stop

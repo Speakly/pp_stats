@@ -169,18 +169,164 @@ class GameController extends Controller
             }
             // Si arriere
             elseif($poste = "Arriere") {
+                 // Victoire
+                if($victoire = 1) $note = $note + 5;
 
+                // Minutes joués
+                if($data['minutes'] <= 10) $note = $note + 1;
+                if($data['minutes'] > 10 && $data['minutes'] <= 20) $note = $note + 2;
+                if($data['minutes'] > 20 && $data['minutes'] <= 30) $note = $note + 3;
+                if($data['minutes'] > 30 && $data['minutes'] <= 40) $note = $note + 4;
+
+                // Points
+                if($data['points'] <= 10) $note = $note + 1;
+                if($data['points'] > 10 && $data['points'] <= 15) $note = $note + 2.5;
+                if($data['points'] > 15 && $data['points'] <= 20) $note = $note + 3.5;
+                if($data['points'] > 20) $note = $note + 4;
+
+                // 3 points
+                if($data['trois_points'] > 0 && $data['trois_points'] <= 5) $note = $note + 1.5;
+                if($data['trois_points'] > 5 && $data['trois_points'] <= 10) $note = $note + 2.5;
+                if($data['trois_points'] > 10) $note = $note + 6;
+
+                // cinq majeur
+                if($data['cinq_majeur'] == 1) $note = $note + 1;
+
+                // lancer franc
+                if($data['lancer_franc'] == 1) $note = $note + 0.25;
+                if($data['lancer_franc'] == 2) $note = $note + 0.50;
+                if($data['lancer_franc'] == 3) $note = $note + 1;
+                if($data['lancer_franc'] > 3) $note = $note + 2;
+
+                // Rebonds 
+                if($data['rebonds'] > 0 && $data['rebonds'] < 10) $note = $note + 2;
+                if($data['rebonds'] > 10) $note = $note + 2;
+
+                // Interceptions
+                if($data['interceptions'] > 0 && $data['interceptions'] < 10) $note = $note + 1;
+                if($data['interceptions'] >= 10 && $data['interceptions'] < 15) $note = $note + 2;
+                if($data['interceptions'] > 15) $note = $note + 3;
+
+                // Fautes
+                if($data['fautes'] > 0 && $data['fautes'] <= 3) $note = $note - 0.5;
+                if($data['fautes'] == 4) $note = $note - 1;
+                if($data['fautes'] > 4) $note = $note - 4;
+
+                // Passes
+                if($data['passe'] > 0 && $data['passe'] <= 5) $note = $note + 2;
+                if($data['passe'] > 5 && $data['passe'] <= 10) $note = $note + 3;
+                if($data['passe'] > 10 && $data['passe'] <= 15) $note = $note + 4;
+                if($data['passe'] > 15) $note = $note + 5;
+
+                $data = array_add($data, 'evaluation', $note);
             }
             // Si pivot
             elseif($poste = "Pivot") {
+                 // Victoire
+                if($victoire = 1) $note = $note + 5;
 
-            }
-            // Si ailier
-            elseif($poste = "Ailier") {
+                // Minutes joués
+                if($data['minutes'] <= 10) $note = $note + 1;
+                if($data['minutes'] > 10 && $data['minutes'] <= 20) $note = $note + 2;
+                if($data['minutes'] > 20 && $data['minutes'] <= 30) $note = $note + 3;
+                if($data['minutes'] > 30 && $data['minutes'] <= 40) $note = $note + 4;
 
+                // Points
+                if($data['points'] <= 10) $note = $note + 1;
+                if($data['points'] > 10 && $data['points'] <= 15) $note = $note + 2;
+                if($data['points'] > 15 && $data['points'] <= 20) $note = $note + 3;
+                if($data['points'] > 20) $note = $note + 4;
+
+                // 3 points
+                if($data['trois_points'] > 0 && $data['trois_points'] <= 5) $note = $note + 1;
+                if($data['trois_points'] > 5 && $data['trois_points'] <= 10) $note = $note + 2;
+                if($data['trois_points'] > 10) $note = $note + 5;
+
+                // cinq majeur
+                if($data['cinq_majeur'] == 1) $note = $note + 1;
+
+                // lancer franc
+                if($data['lancer_franc'] == 1) $note = $note + 0.25;
+                if($data['lancer_franc'] == 2) $note = $note + 0.50;
+                if($data['lancer_franc'] == 3) $note = $note + 1;
+                if($data['lancer_franc'] > 3) $note = $note + 2;
+
+                // Rebonds 
+                if($data['rebonds'] > 0 && $data['rebonds'] < 10) $note = $note + 2.5;
+                if($data['rebonds'] > 10) $note = $note + 3.5;
+
+                // Interceptions
+                if($data['interceptions'] > 0 && $data['interceptions'] < 10) $note = $note + 1;
+                if($data['interceptions'] >= 10 && $data['interceptions'] < 15) $note = $note + 2;
+                if($data['interceptions'] > 15) $note = $note + 3;
+
+                // Fautes
+                if($data['fautes'] > 0 && $data['fautes'] <= 3) $note = $note - 0.5;
+                if($data['fautes'] == 4) $note = $note - 1;
+                if($data['fautes'] > 4) $note = $note - 4;
+
+                // Passes
+                if($data['passe'] > 0 && $data['passe'] <= 5) $note = $note + 2;
+                if($data['passe'] > 5 && $data['passe'] <= 10) $note = $note + 3;
+                if($data['passe'] > 10 && $data['passe'] <= 15) $note = $note + 4;
+                if($data['passe'] > 15) $note = $note + 5;
+
+                $data = array_add($data, 'evaluation', $note);
             }
-            // ailier fort
-            else{}
+            // Si ailier || ailier fort
+            else {
+                 // Victoire
+                if($victoire = 1) $note = $note + 5;
+
+                // Minutes joués
+                if($data['minutes'] <= 10) $note = $note + 1;
+                if($data['minutes'] > 10 && $data['minutes'] <= 20) $note = $note + 2;
+                if($data['minutes'] > 20 && $data['minutes'] <= 30) $note = $note + 3;
+                if($data['minutes'] > 30 && $data['minutes'] <= 40) $note = $note + 4;
+
+                // Points
+                if($data['points'] <= 10) $note = $note + 1;
+                if($data['points'] > 10 && $data['points'] <= 15) $note = $note + 2;
+                if($data['points'] > 15 && $data['points'] <= 20) $note = $note + 3;
+                if($data['points'] > 20) $note = $note + 4;
+
+                // 3 points
+                if($data['trois_points'] > 0 && $data['trois_points'] <= 5) $note = $note + 1;
+                if($data['trois_points'] > 5 && $data['trois_points'] <= 10) $note = $note + 2;
+                if($data['trois_points'] > 10) $note = $note + 5;
+
+                // cinq majeur
+                if($data['cinq_majeur'] == 1) $note = $note + 1;
+
+                // lancer franc
+                if($data['lancer_franc'] == 1) $note = $note + 0.25;
+                if($data['lancer_franc'] == 2) $note = $note + 0.50;
+                if($data['lancer_franc'] == 3) $note = $note + 1;
+                if($data['lancer_franc'] > 3) $note = $note + 2;
+
+                // Rebonds 
+                if($data['rebonds'] > 0 && $data['rebonds'] < 10) $note = $note + 2.5;
+                if($data['rebonds'] > 10) $note = $note + 3.5;
+
+                // Interceptions
+                if($data['interceptions'] > 0 && $data['interceptions'] < 10) $note = $note + 1;
+                if($data['interceptions'] >= 10 && $data['interceptions'] < 15) $note = $note + 2;
+                if($data['interceptions'] > 15) $note = $note + 3;
+
+                // Fautes
+                if($data['fautes'] > 0 && $data['fautes'] <= 3) $note = $note - 0.5;
+                if($data['fautes'] == 4) $note = $note - 1;
+                if($data['fautes'] > 4) $note = $note - 4;
+
+                // Passes
+                if($data['passe'] > 0 && $data['passe'] <= 5) $note = $note + 2;
+                if($data['passe'] > 5 && $data['passe'] <= 10) $note = $note + 3;
+                if($data['passe'] > 10 && $data['passe'] <= 15) $note = $note + 4;
+                if($data['passe'] > 15) $note = $note + 5;
+
+                $data = array_add($data, 'evaluation', $note);
+            }
+            
 
 
         $analyse = Statistiques::create($data);
@@ -188,6 +334,9 @@ class GameController extends Controller
         // Si stats remplis game done vaut 1
         if($analyse){
             $game = Game::find($data['game_id']);
+            $game->score_adverse = $data['score_adverse'];
+            $game->score_user = $data['score_user'];
+            $game->victoire = $victoire;
             $game->done = 1;
             $game->save();
         }

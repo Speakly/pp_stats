@@ -1,48 +1,50 @@
-             <!-- main col left -->
-        <div class="col-sm-4 col-xs-12 col-md-3">
+        <div class="col-sm-5 col-xs-4 col-md-3">
             <div class="qw rd aof alt">
                 <div class="qy"></div>
                 <div class="qx dj text-center">
                     <a href="/application/profile/">
+                        
                         @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
                             <img src="{{ URL::asset('images/logos/' . $user->id.'.png') }}" class="aog">
                             
                         @elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
                             <img src="{{ URL::asset('images/logos/' . $user->id.'.jpg') }}" class="aog">
                         @endif
-
                     </a>
                     <h5 class="qz">
-                        <a href="/application/profile/" class="akt">Amaury Leproux</a>
+                        <a href="/application/profile/" class="akt">{{$user->surname}} {{$user->name}} </a>
                     </h5>
+
                     <p class="alt">{{ $user->poste }}, {{ $user->taille }}cm, joue au club <span style="font-weight:bold;">{{ $user->club->nom }}</span></p>
-                    <ul class="aoh">
-                        <li class="aoi">
-                            <a data-toggle="modal" class="akt" href="#userModal">
-                                Matchs
-                                <h5 class="alh">{{ $games }}</h5>
-                            </a>
-                        </li>
-                        <li class="aoi">
-                            <a data-toggle="modal" class="akt" href="#userModal">
-                                Victoires
-                                <h5 class="alh">{{ $victory }}</h5>
-                            </a>
-                        </li>
-                    </ul>
+                    @if($games != null)
+                        <ul class="aoh">
+                            <li class="aoi">
+                                <a data-toggle="modal" class="akt" href="#userModal">
+                                    Matchs
+                                    <h5 class="alh">{{ $games }}</h5>
+                                </a>
+                            </li>
+                            <li class="aoi">
+                                <a data-toggle="modal" class="akt" href="#userModal">
+                                    Victoires
+                                    <h5 class="alh">{{ $victory }}</h5>
+                                </a>
+                            </li>
+                        </ul>
+                    @endif
                 </div>
             </div>
-            @if($nextGame)
-                <div class="panel panel-default">
-                    <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Prochain match</h4></div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <a href="http://bootply.com/tagged/datatable" class="list-group-item">{{$nextGame->name_adverse}}</a>
+            @if($games != null)
+                @if($nextGame != null)
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Prochain match</h4></div>
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="http://bootply.com/tagged/datatable" class="list-group-item">{{$nextGame->name_adverse}}</a>
+                          </div>
                       </div>
-                  </div>
-                </div>
-            @endif
-            @if($gamesPast)
+                    </div>
+                @endif
                 <div class="panel panel-default">
                     <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><i class="glyphicon glyphicon-star-empty"></i>Derniers matchs</h4></div>
                     <div class="panel-body">
