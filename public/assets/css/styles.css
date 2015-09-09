@@ -86,7 +86,7 @@ hr {
 }
 .btn-color-site:hover {
   color:#FFF;
-  background-color:#e74c3c; 
+  background-color:#e74c3c;
 }
 .navbar-blue li > a,.navbar-toggle  {
    color:#efefef;
@@ -180,14 +180,14 @@ h1,h2,h3 {
     text-shadow:0 0 1px rgba(0,0,0,.3);
 }
 .form-control {
-	
+
 }
 
 .panel textarea, .well textarea, textarea.form-control
 {
    resize: none;
 }
-  
+
 .badge{
    color:#3B5999;
    background-color:#fff;
@@ -196,7 +196,7 @@ h1,h2,h3 {
    background-color:#3B5999;
    color:#fff;
 }
-    
+
 .jumbotron {
   background-color:transparent;
 }
@@ -319,7 +319,7 @@ small.text-muted {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-   
+
 
 }
 .qx {
@@ -427,4 +427,54 @@ input.form-control {
   font-weight: bold;
   margin-top:5px;
   margin-bottom: 20px;
+}
+#profile-picture {
+	max-height: 150px !important;
+	min-height: 150px !important;
+}
+#profile-picture .dz-default {
+	  bottom: 0;
+    height: 140px;
+    left: inherit;
+    margin: 0;
+    padding: 50px 0;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+#profile-picture .dz-default span {
+	display: table-cell;
+	font-size: 15px;
+}
+#profile-picture .dz-preview {
+	background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
+    border: 1px solid #acacac;
+    display: inline-block;
+    height: 140px;
+    padding: 6px;
+    position: relative;
+    top: -15px;
+    vertical-align: top;
+    margin:0;
+}
+input[type="file"]{
+  display:none !important;
+}
+.btn-skin {
+  background-color: #e74c3c;
+  color:white;
+}
+.btn-skin:hover {
+  color:white;
+}
+.navbar-nav > li > a.dropdown-toggle {
+    height: 50px;
+    line-height: 0px;
+}
+.navbar-nav > li.dropdown {
+  margin-right:15px;
+}
+.inscription-avatar {
+  margin-bottom:50px;
 }

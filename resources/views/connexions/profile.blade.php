@@ -1,14 +1,11 @@
-@extends('layouts.inscription')
+@extends('layouts.index')
 
 @section('css')
-    <link href="{{ URL::asset('assets/css/app.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('assets/css/dropzone.css')}}" rel="stylesheet" type="text/css">
 @stop
 
 @section('content')
-
-    <div class="st-pusher" id="content" style="margin-left:0px !important">
-
+    <div class="st-pusher" id="content">
         <div class="st-content">
             <!-- extra div for emulating position:fixed of the menu -->
             <div class="st-content-inner">
@@ -36,7 +33,7 @@
                                             <div class="dz-default dz-message"><span>Cliquez ou déposez l'image ici</span></div>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="id" value="{{ $user->id }}">
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-md-offset-4 text-center inscription-birthday">
@@ -55,7 +52,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -98,7 +95,7 @@
                                             {!! $errors->first('poste', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="text-center inscription-btn btn-submit-form">
                                     {!! Form::submit('Suivant', ['class' => 'btn btn-skin']) !!}
                                 </div>
@@ -106,7 +103,7 @@
                         </div>
                     </div>
 
-                    
+
                     <!--<div class="panel panel-default">
                         <div class="panel-heading panel-heading-gray">
                             <div class="pull-right">
@@ -146,7 +143,7 @@
                 }
             });
         });
-        
+
         if( $('.dropzone').length > 0 ) {
         Dropzone.autoDiscover = false;
         //console.log($('[name=_token').val());

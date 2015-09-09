@@ -6,26 +6,24 @@
 		<title>Profilplayers Basket - Suis tes performances</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="{{ URL::asset('assets/css/skin-orange.css') }}" type="text/css">
 		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-    <!--<link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">-->
 		<link href="{{ URL::asset('assets/css/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  
+
+		@yield('css')
+
 	</head>
 	<body>
 <div class="wrapper">
     <div class="box">
         <div class="row row-offcanvas row-offcanvas-left">
-          
+
             <!-- main right col -->
             <div class="column col-sm-12 col-xs-12" id="main">
-                
+
                 <!-- top nav -->
-              	<div class="navbar navbar-blue navbar-static-top">  
+              	<div class="navbar navbar-blue navbar-static-top">
                     <div class="navbar-header">
                       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle</span>
@@ -44,20 +42,22 @@
                           </div>
                         </div>
                     </form>
-                    <ul class="nav navbar-nav">
-                      <li>
-                        <a href="{{ URL::action('PageController@timeline', [$user->surname, $user->name]) }}"><i class="glyphicon glyphicon-home"></i> Accueil</a>
-                      </li>
-                      <li>
-                        <a href="{{ URL::action('PageController@statistiques', $user->id)}}"><i class="glyphicon glyphicon-signal"></i> Statistiques</a>
-                      </li>
-                      <li>
-                        <a href="{{ URL::action('GameController@show', $user->id) }}"><i class="glyphicon glyphicon-star-empty"></i> Matchs</a>
-                      </li>
-                      <li>
-                        <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Ajouter match</a>
-                      </li>
-                    </ul>
+										@if(isset($user))
+											<ul class="nav navbar-nav">
+	                      <li>
+	                        <a href="{{ URL::action('PageController@timeline', [$user->surname, $user->name]) }}"><i class="glyphicon glyphicon-home"></i> Accueil</a>
+	                      </li>
+	                      <li>
+	                        <a href="{{ URL::action('PageController@statistiques', $user->id)}}"><i class="glyphicon glyphicon-signal"></i> Statistiques</a>
+	                      </li>
+	                      <li>
+	                        <a href="{{ URL::action('GameController@show', $user->id) }}"><i class="glyphicon glyphicon-star-empty"></i> Matchs</a>
+	                      </li>
+	                      <li>
+	                        <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Ajouter match</a>
+	                      </li>
+	                    </ul>
+										@endif
                     <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
@@ -70,86 +70,88 @@
                   	</nav>
                 </div>
                 <!-- /top nav -->
-              
+
                 <div class="padding">
-                    <div class="full col-sm-9">
-                      
+                    <div class="full">
+
                       @yield('content')
-                        
+
                     </div><!-- /col-9 -->
                 </div><!-- /padding -->
             </div>
             <!-- /main -->
-          
+
         </div>
     </div>
 </div>
 
 
 <!--post modal-->
-<div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>Ajoutes ton match
-        </div>
-        {!! Form::open([
-            'method' => 'POST',
-            'action' => 'GameController@create',
-            'enctype' => 'multipart/form-data'
-            ])
-        !!}
-          <div class="modal-body">
-            {!! Form::hidden('club_id_user', $user->club->id) !!}
-            {!! Form::hidden('club_id', null, array('id' => 'i')) !!}
-            {!! Form::hidden('user_id', $user->id) !!}
-            <div class="form-group row">
-              <div class="col-md-3">
-                <label class="control-label">Club adverse</label>
-              </div>
-              <div class="col-md-9">
-                {!! Form::text('club_adverse', null, array('placeholder' => 'Le club adverse*', 'id' => 'q', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-3">
-                <label class="control-label">Date</label>
-              </div>
-              <div class="col-md-9">
-                <input type="text" id="datepicker" name="date">
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-3">
-                <label class="control-label">A domicile ?</label>
-              </div>
-              <div class="col-md-9">
-                Oui {!! Form::radio('domicile', 1, 'oui') !!}
-                Non {!! Form::radio('domicile', 0, 'non') !!}
-              </div>
-            </div>    
-          </div>
-          <div class="modal-footer text-center">
-            <div>
-              <div class="text-center inscription-btn btn-submit-form">
-                {!! Form::submit('Ajouter', ['class' => 'btn btn-color-site']) !!}
-              </div>
-              </div>  
-          </div>
-        {!! Form::close() !!}
-      </div>
-  </div>
-</div>
+@if(isset($user->club))
+	<div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>Ajoutes ton match
+	        </div>
+	        {!! Form::open([
+	            'method' => 'POST',
+	            'action' => 'GameController@create',
+	            'enctype' => 'multipart/form-data'
+	            ])
+	        !!}
+	          <div class="modal-body">
+	            {!! Form::hidden('club_id_user', $user->club->id) !!}
+	            {!! Form::hidden('club_id', null, array('id' => 'i')) !!}
+	            {!! Form::hidden('user_id', $user->id) !!}
+	            <div class="form-group row">
+	              <div class="col-md-3">
+	                <label class="control-label">Club adverse</label>
+	              </div>
+	              <div class="col-md-9">
+	                {!! Form::text('club_adverse', null, array('placeholder' => 'Le club adverse*', 'id' => 'q', 'class' => 'form-control inscription-placeholder form-control-default required')) !!}
+	              </div>
+	            </div>
+	            <div class="form-group row">
+	              <div class="col-md-3">
+	                <label class="control-label">Date</label>
+	              </div>
+	              <div class="col-md-9">
+	                <input type="text" id="datepicker" name="date">
+	              </div>
+	            </div>
+	            <div class="form-group row">
+	              <div class="col-md-3">
+	                <label class="control-label">A domicile ?</label>
+	              </div>
+	              <div class="col-md-9">
+	                Oui {!! Form::radio('domicile', 1, 'oui') !!}
+	                Non {!! Form::radio('domicile', 0, 'non') !!}
+	              </div>
+	            </div>
+	          </div>
+	          <div class="modal-footer text-center">
+	            <div>
+	              <div class="text-center inscription-btn btn-submit-form">
+	                {!! Form::submit('Ajouter', ['class' => 'btn btn-color-site']) !!}
+	              </div>
+	              </div>
+	          </div>
+	        {!! Form::close() !!}
+	      </div>
+	  </div>
+	</div>
+@endif
 
 
 	<!-- script references -->
     <script>BASE_URL = '{{ URL::to("/") }}/' </script>
-    
+
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 		<script src="{{ URL::asset('assets/js/scripts.js') }}"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function()
         {
@@ -166,5 +168,6 @@
         $( "#datepicker" ).datepicker();
       });
     </script>
+		@yield('scripts')
 	</body>
 </html>

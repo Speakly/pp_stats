@@ -72,8 +72,7 @@ class ConnexionController extends Controller
 
         $validator = Validator::make($data, User::$rulesUpdate);
         if($validator->fails())
-            return view('connexions.profile', compact('user')->withErrors($validator));
-
+            return view('connexions.profile', compact('user')->withInput()->withErrors($validator));
 
         $user->name = $data['name'];
         $user->surname = $data['surname'];
@@ -84,9 +83,9 @@ class ConnexionController extends Controller
         $user->birthday = $data['birthday'];
         $user->save();
 
-
-
-        return Redirect::action('PageController@addGame', compact('id'));
+        $new = 'new';
+        $identification = Auth::loginUsingId($user->id);
+        return Redirect::action('PageController@timeline', compact('id', 'identification', 'new'));
     }
 
     /**
