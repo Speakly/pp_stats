@@ -54,7 +54,7 @@
                         {!! $errors->first('surname', '<small class="help-block">:message</small>') !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::email('email', null, array('placeholder'=>'E-mail', 'class' => 'form-control')) !!}
+                        {!! Form::email('email_inscription', null, array('placeholder'=>'E-mail', 'class' => 'form-control')) !!}
                         {!! $errors->first('email_inscription', '<small class="help-block">:message</small>') !!}
                     </div>
                     <div class="form-group">

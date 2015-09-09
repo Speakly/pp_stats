@@ -28,9 +28,6 @@ class ConnexionController extends Controller
     public function inscription()
     {
         $data = Input::all();
-        $validator = Validator::make($data, User::$rulesInscription);
-		    if($validator->fails())
-			     return Redirect::action('PageController@index')->withInput()->withErrors($validator);
 
         $pwd = Hash::make($data['password_inscription']);
         $dataUser = array(
@@ -38,8 +35,23 @@ class ConnexionController extends Controller
           "surname" => $data['surname'],
           "email" => $data['email_inscription'],
           "password" => $pwd,
+          "email_inscription" => $data['email_inscription'],
+          "password_inscription" => $pwd
         );
-        $user = User::create($dataUser);
+
+        $validator = Validator::make($data, User::$rulesInscription);
+		    if($validator->fails())
+          return Redirect::action('PageController@index')->withInput()->withErrors($validator);
+
+        $data = array(
+          "name" => $dataUser['name'],
+          "surname" => $dataUser['surname'],
+          "email" => $dataUser['email_inscription'],
+          "password" => $pwd
+        );
+
+
+        $user = User::create($data);
 
         return view('connexions.profile', compact('user'));
 
