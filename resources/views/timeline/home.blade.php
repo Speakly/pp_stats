@@ -9,10 +9,8 @@
     <div class="row">
         <!-- main col left -->
         @include('layouts.nav-left')
-
         <!-- main col right -->
         <div id="main-center" class="col-sm-5 col-xs-5 col-md-6">
-
             <div class="well">
               {!! Form::open([
                   'method' => 'POST',
@@ -60,7 +58,6 @@
                       Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
                   </div>
                 </div>
-
                 @elseif(isset($y['user_id']) || isset($y['$message']))
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -82,12 +79,6 @@
                 </div>
               @endif
             @endforeach
-
-            <!-- POST  -->
-            @foreach($post as $value)
-
-            @endforeach
-
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Stackoverflow</h4></div>
                 <div class="panel-body">
@@ -151,8 +142,6 @@
             </div>
         </div>
     </div><!--/row-->
-
-
 @stop
 
 @section('scripts')

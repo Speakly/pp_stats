@@ -34,10 +34,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['password', 'remember_token'];
 
     public static $rules = [
+        'email' => 'required|email|unique:users',
+        'password' => 'required'
+    ];
+
+    public static $rulesInscription = [
         'name' => 'required',
         'surname' => 'required',
-        'email' => 'required|email|unique:users,id',
-        'password' => 'required'
+        'email_inscription' => 'required|email|unique:users',
+        'password_inscription' => 'required'
     ];
 
     public static $rulesUpdate = [
@@ -64,6 +69,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('App\Statistiques', 'user_id', 'id');
     }
-    
+
 
 }

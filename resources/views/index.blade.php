@@ -14,6 +14,7 @@
                 <p>Profilplayers Basket vous permet de <strong>suivre vos performances</strong> tout au long de vos compétitions.<br> Vous renseigner votre club, vos matchs, vos analyses de matchs et vos performances seront enregistrées tout au long des saisons.</p>
             </div>
             <div class="col-md-5">
+              <!-- Connexion -->
                 <div id="homepage-connexion">
                     {!! Form::open([
                         'method' => 'POST',
@@ -35,6 +36,9 @@
                     </div>
                     {!! Form::close() !!}
                 </div>
+                <!-- End Connexion -->
+
+                <!-- Inscription -->
                 <div id="homepage-inscription">
                     {!! Form::open([
                         'method' => 'POST',
@@ -51,11 +55,11 @@
                     </div>
                     <div class="form-group">
                         {!! Form::email('email', null, array('placeholder'=>'E-mail', 'class' => 'form-control')) !!}
-                        {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
+                        {!! $errors->first('email_inscription', '<small class="help-block">:message</small>') !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::password('password', array('placeholder'=>'Mot de passe', 'class' => 'form-control')) !!}
-                        {!! $errors->first('passwrord', '<small class="help-block">:message</small>') !!}
+                        {!! Form::password('password_inscription', array('placeholder'=>'Mot de passe', 'class' => 'form-control')) !!}
+                        {!! $errors->first('password_inscription', '<small class="help-block">:message</small>') !!}
                     </div><br/>
                     <div class="text-center">
                         <div>
@@ -64,17 +68,15 @@
                     </div>
                     {!! Form::close() !!}
                 </div>
+                <!-- End Inscription -->
             </div>
         </div>
     </div>
     <div class="text-center" id="homepage-footer">
-        
+
     </div>
 </div>
 @stop
 
 @section('scripts')
 @stop
-
-
-

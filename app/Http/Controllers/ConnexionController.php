@@ -27,36 +27,26 @@ class ConnexionController extends Controller
 
     public function inscription()
     {
-
-        
         $data = Input::all();
+        $validator = Validator::make($data, User::$rulesInscription);
+		    if($validator->fails())
+			     return Redirect::action('PageController@index')->withInput()->withErrors($validator);
 
-        $validator = Validator::make($data, User::$rules);
-        if($validator->fails())
-        {
-            $messages = $validator->messages();
-            //dd($messages);
-            return view('index', compact('messages'));
-        }   
-        else
-        {
+        $pwd = Hash::make($data['password_inscription']);
+        $dataUser = array(
+          "name" => $data['name'],
+          "surname" => $data['surname'],
+          "email" => $data['email_inscription'],
+          "password" => $pwd,
+        );
+        $user = User::create($dataUser);
 
-            $pwd = Hash::make($data['password']);
-            $dataUser = array(
-                "name" => $data['name'],
-                "surname" => $data['surname'],
-                "email" => $data['email'],
-                "password" => $pwd,
-            );
+        return view('connexions.profile', compact('user'));
 
-            $user = User::create($dataUser);
-
-            return view('connexions.profile', compact('user'));
-        }   
     }
 
     public function profile()
-    { 
+    {
         return view('connexions.profile', compact('user'));
     }
 
@@ -67,7 +57,7 @@ class ConnexionController extends Controller
         $data = array_add($data, 'birthday', $birthday);
         $id = $data['id'];
         $user = User::find($id);
-      
+
         $validator = Validator::make($data, User::$rulesUpdate);
         if($validator->fails())
             return view('connexions.profile', compact('user')->withErrors($validator));
@@ -82,7 +72,7 @@ class ConnexionController extends Controller
         $user->birthday = $data['birthday'];
         $user->save();
 
-        
+
 
         return Redirect::action('PageController@addGame', compact('id'));
     }
@@ -109,12 +99,17 @@ class ConnexionController extends Controller
     }
     public function connexion(){
         $data = Input::all();
+        $validator = Validator::make($data, User::$rules);
+        if($validator->fails())
+          return Redirect::action('PageController@index')->withInput()->withErrors($validator);
+
+
         if(Auth::attempt(array('email' => $data['email'], 'password' => $data['password']))){
             $user = User::find(Auth::id());
             $name = $user->name;
             $surname = $user->surname;
             return Redirect::action('PageController@timeline', compact('name', 'surname'));
-        }    
+        }
         else return Redirect::action('PageController@index')->withInput();
     }
     /**
