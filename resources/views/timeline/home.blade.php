@@ -30,58 +30,62 @@
                 <ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>
                 {!! Form::close() !!}
             </div>
-            @if($gamesPast)
-                @foreach($gamesPast as $gamePast)
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4>
-                                <i class="glyphicon glyphicon-star-empty"></i>
-                                @if($gamePast->victoire = 1)
-                                    <span style="color:green">Victoire</span>
-                                @elseif($gamePast->victoire = 0)
-                                    <span style="color:red">Défaite</span>
-                                @else
-                                    <span>Nul</span>
-                                @endif
+            @foreach($x as $y)
+              @if(isset($y['name_adverse']))
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4>
+                      <i class="glyphicon glyphicon-star-empty"></i>
+                      @if($y['victoire'] = 1)
+                        <span style="color:green">Victoire</span>
+                      @elseif($y['victoire'] = 0)
+                        <span style="color:red">Défaite</span>
+                      @else
+                        <span>Nul</span>
+                      @endif
+                      contre {{$y['name_adverse']}}
+                    </h4>
+                  </div>
+                  <div class="panel-body">
+                    <p class="text-center">
+                      <a href="#"></a>
+                        @if($y['domicile'] == 1)
+                          {{$user->club->nom}} <span>{{$y['score_user']}} - {{$y['score_adverse']}} </span>{{$y['name_adverse']}}
+                        @else
+                          {{$y['score_adverse']}} - {{$y['score_user']}}
+                        @endif
+                    </p>
+                    <div class="clearfix"></div>
+                    <hr>
+                      Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
+                  </div>
+                </div>
 
-                                contre
-                                {{$gamePast->name_adverse}}
-                            </h4></div>
-                        <div class="panel-body">
-                            <p class="text-center">
-                                <a href="#"></a>
-                                @if($gamePast->domicile == 1)
-                                    {{$user->club->nom}} <span>{{$gamePast->score_user}} - {{$gamePast->score_adverse}} </span>{{$gamePast->name_adverse}}
-                                @else
-                                    {{$gamePast->score_adverse}} - {{$gamePast->score_user}}
-                                @endif
-                            </p>
-                            <div class="clearfix"></div>
-                            <hr>
-                            Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
-                        </div>
+                @elseif(isset($y['user_id']) || isset($y['$message']))
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            {{$user->surname}} {{$user->name}} vient de publier :
+                        </h4></div>
+                    <div class="panel-body">
+                        <p class="text-center">
+                            <a href="#"></a>
+                            @if(isset($y['message']))
+                              {{$y['message']}}
+                            @endif
+                        </p>
+                        <div class="clearfix"></div>
+                        <hr>
+                        Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
                     </div>
-                @endforeach
-            @endif
+                </div>
+              @endif
+            @endforeach
 
             <!-- POST  -->
             @foreach($post as $value)
-              <div class="panel panel-default">
-                  <div class="panel-heading">
-                      <h4>
-                          <i class="glyphicon glyphicon-list-alt"></i>
-                          {{$user->surname}} {{$user->name}} vient de publier :
-                      </h4></div>
-                  <div class="panel-body">
-                      <p class="text-center">
-                          <a href="#"></a>
-                          {{$value->message}}
-                      </p>
-                      <div class="clearfix"></div>
-                      <hr>
-                      Design, build, test, and prototype using Bootstrap in real-time from your Web browser. Bootply combines the power of hand-coded HTML, CSS and JavaScript with the benefits of responsive design using Bootstrap. Find and showcase Bootstrap-ready snippets in the 100% free Bootply.com code repository.
-                  </div>
-              </div>
+
             @endforeach
 
             <div class="panel panel-default">
@@ -110,7 +114,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="{{ URL::action('PageController@statistiques', $user->id)}}" class="pull-right">Toutes les stats</a> <h4>Statistiques</h4></div>
                 <div class="panel-body">
-                    @if(empty($stats))
+                    @if($stats)
                         <div class="list-group">
                             <a href="http://bootply.com/tagged/modal" class="list-group-item">Minutes : {{$stats['minutes']}}</a>
                             <a href="http://bootply.com/tagged/datetime" class="list-group-item">Point(s) : {{$stats['points']}}</a>

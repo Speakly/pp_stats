@@ -39,11 +39,45 @@ class PageController extends Controller
             if(isset($user->game)){
 
                 $games = count($user->game);
-                $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
+                $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->orderBy('created_at', 'DESC')->get();
                 $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
                 $statistiques = Statistiques::where('user_id', $user['id'])->get();
                 $statsLastGame = Statistiques::where('user_id', $user['id'])->orderBy('created_at', 'DESC')->take(1)->first();
                 $post = Post::where('user_id', $user['id'])->orderBy('created_at', 'DESC')->get();
+
+                // construction tableau games passés
+                $g = array();
+                $a = count($gamesPast);
+                for($i=0;$i<$a;$i++)
+                {
+                  $g[$i]['name_adverse'] = $gamesPast[$i]['name_adverse'];
+                  $g[$i]['domicile'] = $gamesPast[$i]['domicile'];
+                  $g[$i]['score_user'] = $gamesPast[$i]['score_user'];
+                  $g[$i]['score_adverse'] = $gamesPast[$i]['score_adverse'];
+                  $g[$i]['date'] = $gamesPast[$i]['date'];
+                  $g[$i]['victoire'] = $gamesPast[$i]['victoire'];
+                  $g[$i]['done'] = $gamesPast[$i]['done'];
+                  $g[$i]['created_at'] = $gamesPast[$i]['created_at']->getTimestamp();
+                }
+
+                // construction d'un tableau des posts pour merger avec les ajouts d'analyse de match
+                $p = array();
+                $c = count($post);
+                for($i=0;$i<$c;$i++)
+                {
+                  $p[$i]['user_id'] = $post[$i]['user_id'];
+                  $p[$i]['message'] = $post[$i]['message'];
+                  $p[$i]['picture_url'] = $post[$i]['picture_url'];
+                  $p[$i]['created_at'] = $post[$i]['created_at']->getTimestamp();
+                }
+
+
+                // merge des 2 tableaux
+                $x = array_merge($g, $p);
+                // trie par date décroissante
+                usort($x, function($a, $b) {
+                    return $b['created_at'] - $a['created_at'] ;
+                });
 
                 $stats = array(
                     'minutes' => '',
@@ -96,7 +130,7 @@ class PageController extends Controller
                 $nextGame = null;
             }
             $victory = $stats['victoire'];
-            return view ('timeline.home', compact('user', 'games', 'post', 'stats', 'statsLastGame', 'victory', 'gamesPast', 'nextGame'));
+            return view ('timeline.home', compact('user', 'x', 'games', 'post', 'stats', 'statsLastGame', 'victory', 'gamesPast', 'nextGame'));
         }
         else return Redirect::action('PageController@index');
 
@@ -160,12 +194,21 @@ class PageController extends Controller
         if(Auth::id()){
             $user = User::with('game')->find(Auth::id());
             if(isset($user->game)){
-
                 $games = count($user->game);
                 $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
                 $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
                 $statistiques = Statistiques::with('game')->where('user_id', $user['id'])->get();
                 $statsLastGame = Statistiques::where('user_id', $user['id'])->orderBy('created_at', 'DESC')->take(1)->first();
+
+                $victoire = array(
+                  'victoire' => ''
+                );
+                $c = count($gamesPast);
+                // count victoire
+                for($i=0;$i<$c;$i++)
+                {
+                  $victoire['victoire'] += $gamesPast[$i]['victoire'];
+                }
 
                 $stats = array(
                     'minutes' => '',
@@ -180,8 +223,6 @@ class PageController extends Controller
                     'victoire' => '',
                     'evaluation' => ''
                     );
-
-
 
                 $count = count($statistiques);
                 if(empty($statistiques)) {
@@ -199,26 +240,23 @@ class PageController extends Controller
                         $stats['evaluation'] = $statistiques[0]['evaluation'];
                     }
 
-
-                    else {
-                        for($i=0;$i<$count;$i++){
-                            $stats['minutes'] += $statistiques[$i]['minutes'];
-                            $stats['passes'] += $statistiques[$i]['passe'];
-                            $stats['points'] += $statistiques[$i]['points'];
-                            $stats['trois_points'] += $statistiques[$i]['trois_points'];
-                            $stats['titulaire'] += $statistiques[$i]['titulaire'];
-                            $stats['lancer_franc'] += $statistiques[$i]['lancer_franc'];
-                            $stats['rebonds'] += $statistiques[$i]['rebonds'];
-                            $stats['interceptions'] += $statistiques[$i]['insterceptions'];
-                            $stats['fautes'] += $statistiques[$i]['fautes'];
-                            $stats['victoire'] += $statistiques[$i]['victoire'];
-                            $stats['evaluation'] += $statistiques[$i]['evaluation'];
-
-                        }
-                        $stats['evaluation'] = round($stats['evaluation'] / $count, 1);
-
-                    }
+              }
+              else {
+                for($i=0;$i<$count;$i++){
+                  $stats['minutes'] += $statistiques[$i]['minutes'];
+                  $stats['passes'] += $statistiques[$i]['passe'];
+                  $stats['points'] += $statistiques[$i]['points'];
+                  $stats['trois_points'] += $statistiques[$i]['trois_points'];
+                  $stats['titulaire'] += $statistiques[$i]['titulaire'];
+                  $stats['lancer_franc'] += $statistiques[$i]['lancer_franc'];
+                  $stats['rebonds'] += $statistiques[$i]['rebonds'];
+                  $stats['interceptions'] += $statistiques[$i]['insterceptions'];
+                  $stats['fautes'] += $statistiques[$i]['fautes'];
+                  $stats['victoire'] += $statistiques[$i]['victoire'];
+                  $stats['evaluation'] += $statistiques[$i]['evaluation'];
                 }
+                $stats['evaluation'] = round($stats['evaluation'] / $count, 1);
+              }
             }
             else {
                 $user = User::find(Auth::id());
@@ -226,9 +264,7 @@ class PageController extends Controller
                 $gamesPast = null;
                 $nextGame = null;
             }
-
-            $victory = 1;
-            return view ('statistiques.index', compact('user', 'games', 'statistiques', 'stats', 'statsLastGame', 'victory', 'gamesPast', 'nextGame'));
+            return view ('statistiques.index', compact('user', 'games', 'victoire', 'statistiques', 'stats', 'statsLastGame', 'gamesPast', 'nextGame'));
         }
         else return Redirect::action('PageController@index');
 

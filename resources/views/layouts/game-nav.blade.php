@@ -6,7 +6,7 @@
                     <a href="/application/profile/">
                         @if(File::exists(public_path().'/images/logos/'.$user->id.'.png'))
                             <img src="{{ URL::asset('images/logos/' . $user->id.'.png') }}" class="aog">
-                            
+
                         @elseif(File::exists(public_path().'/images/logos/'.$user->id.'.jpg'))
                             <img src="{{ URL::asset('images/logos/' . $user->id.'.jpg') }}" class="aog">
                         @endif
@@ -26,7 +26,7 @@
                         <li class="aoi">
                             <a data-toggle="modal" class="akt" href="#userModal">
                                 Victoires
-                                <h5 class="alh">{{ $victory }}</h5>
+                                <h5 class="alh">{{$victoire['victoire']}}</h5>
                             </a>
                         </li>
                     </ul>

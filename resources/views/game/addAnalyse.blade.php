@@ -4,13 +4,9 @@
 @stop
 
 @section('content')
-	<!-- content -->                     
+	<!-- content -->
     <div class="row">
-        
-
-            @include('layouts.game-nav')
-
-        </div>
+      @include('layouts.game-nav')
 
         <!-- main col right -->
         <div id="main-center" class="col-sm-5 col-xs-5 col-md-9">
@@ -20,9 +16,9 @@
                     {!! Form::open([
                         'method' => 'POST',
                         'action' => ['GameController@addAnalyse']
-                        ]) 
+                        ])
                     !!}
-                    
+
                     {!! Form::hidden('user_id', $user->id) !!}
                     {!! Form::hidden('name', $user->name) !!}
                     {!! Form::hidden('surname', $user->surname) !!}
@@ -32,11 +28,11 @@
                         @if($game->domicile == 1)
                             <div class="col-md-4 game-clubmine">
                                 {{ $user->club->nom }}
-                            </div> 
+                            </div>
                             <div class="col-md-2">
                                 {!! Form::text('score_user', null, ['class' => 'form-control analyse-score', 'style' => 'float:right; width:40px']) !!}
                             </div>
-                            
+
                             <div class="col-md-2">
                                 {!! Form::text('score_adverse', null, ['class' => 'form-control analyse-score', 'style' => 'float:left; width:40px']) !!}
                             </div>
@@ -46,11 +42,11 @@
                         @else
                             <div class="col-md-4">
                                 {{ $game->name_adverse }}
-                            </div> 
+                            </div>
                             <div class="col-md-2">
                                 {!! Form::text('score_adverse', null, ['class' => 'form-control analyse-score', 'style' => 'float:right; width:40px']) !!}
                             </div>
-                            
+
                             <div class="col-md-2">
                                 {!! Form::text('score_user', null, ['class' => 'form-control analyse-score', 'style' => 'float:left; width:40px']) !!}
                             </div>
@@ -96,8 +92,8 @@
                                             {!! Form::text('lancer_franc', null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
-                                    
-                                    
+
+
 
                                 </div>
 
@@ -115,7 +111,7 @@
                                             {!! Form::text('rebonds', null, ['class' => 'form-control']) !!}
                                         </div>
                                         <label class="col-sm-6 control-label">Rebonds</label>
-                                        
+
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-5 col-lg-4">
@@ -147,5 +143,5 @@
 @stop
 
 @section('scripts')
-     
+
 @stop

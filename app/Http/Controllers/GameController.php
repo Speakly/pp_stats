@@ -41,7 +41,7 @@ class GameController extends Controller
                 "game_team_id_1" => $data['club_id_user'],
                 "game_team_id_2" => $data['club_id'],
                 "name_adverse" => $data['club_adverse'],
-                "date" => $date        
+                "date" => $date
         );
         $game = Game::create($data);
 
@@ -72,11 +72,21 @@ class GameController extends Controller
             $query->orderBy('date', 'ASC');
         }))->find($id);
         $games = count($user->game);
-        $victory = 1;
+        $statistiques = Statistiques::with('game')->where('user_id', $user['id'])->get();
         $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
         $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
-        
-        return view('game.showGame', compact('user', 'games', 'victory', 'gamesPast', 'nextGame'));
+
+        $victoire = array(
+          'victoire' => ''
+        );
+        $c = count($gamesPast);
+        // count victoire
+        for($i=0;$i<$c;$i++)
+        {
+          $victoire['victoire'] += $gamesPast[$i]['victoire'];
+        }
+
+        return view('game.showGame', compact('user', 'stats', 'games', 'victoire', 'gamesPast', 'nextGame'));
     }
 
     public function analyse($id, $userId){
@@ -86,7 +96,18 @@ class GameController extends Controller
         $victory = 1;
         $gamesPast = Game::where('club_id', $user['club_id'])->whereRaw('date < Now()')->get();
         $nextGame = Game::where('club_id', $user['club_id'])->whereRaw('date > Now()')->orderBy('created_at', 'DESC')->take(1)->first();
-        return view('game.addAnalyse', compact('user', 'game', 'games', 'victory', 'gamesPast', 'nextGame'));
+        $victoire = array(
+          'victoire' => ''
+        );
+        $c = count($gamesPast);
+        // count victoire
+        for($i=0;$i<$c;$i++)
+        {
+          $victoire['victoire'] += $gamesPast[$i]['victoire'];
+        }
+
+
+        return view('game.addAnalyse', compact('user', 'game', 'games', 'victoire', 'gamesPast', 'nextGame'));
     }
 
     public function addAnalyse(){
@@ -95,7 +116,7 @@ class GameController extends Controller
         // Victoire ou pas
         if($data['score_user'] > $data['score_adverse'])
             $victoire = 1;
-        elseif($data['score_user'] < $data['score_adverse']) 
+        elseif($data['score_user'] < $data['score_adverse'])
             $victoire = 0;
         else
         $victoire = 3;
@@ -144,7 +165,7 @@ class GameController extends Controller
                 if($data['lancer_franc'] == 3) $note = $note + 1;
                 if($data['lancer_franc'] > 3) $note = $note + 2;
 
-                // Rebonds 
+                // Rebonds
                 if($data['rebonds'] > 0 && $data['rebonds'] < 10) $note = $note + 2;
                 if($data['rebonds'] > 10) $note = $note + 2;
 
@@ -198,7 +219,7 @@ class GameController extends Controller
                 if($data['lancer_franc'] == 3) $note = $note + 1;
                 if($data['lancer_franc'] > 3) $note = $note + 2;
 
-                // Rebonds 
+                // Rebonds
                 if($data['rebonds'] > 0 && $data['rebonds'] < 10) $note = $note + 2;
                 if($data['rebonds'] > 10) $note = $note + 2;
 
@@ -251,7 +272,7 @@ class GameController extends Controller
                 if($data['lancer_franc'] == 3) $note = $note + 1;
                 if($data['lancer_franc'] > 3) $note = $note + 2;
 
-                // Rebonds 
+                // Rebonds
                 if($data['rebonds'] > 0 && $data['rebonds'] < 10) $note = $note + 2.5;
                 if($data['rebonds'] > 10) $note = $note + 3.5;
 
@@ -304,7 +325,7 @@ class GameController extends Controller
                 if($data['lancer_franc'] == 3) $note = $note + 1;
                 if($data['lancer_franc'] > 3) $note = $note + 2;
 
-                // Rebonds 
+                // Rebonds
                 if($data['rebonds'] > 0 && $data['rebonds'] < 10) $note = $note + 2.5;
                 if($data['rebonds'] > 10) $note = $note + 3.5;
 
@@ -326,11 +347,11 @@ class GameController extends Controller
 
                 $data = array_add($data, 'evaluation', $note);
             }
-            
+
 
 
         $analyse = Statistiques::create($data);
-        
+
         // Si stats remplis game done vaut 1
         if($analyse){
             $game = Game::find($data['game_id']);
@@ -340,7 +361,7 @@ class GameController extends Controller
             $game->done = 1;
             $game->save();
         }
-        
+
 
         // Pour redirection timeline with param name / surname
         $name = $data['name'];
